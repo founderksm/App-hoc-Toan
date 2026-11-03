@@ -10,7 +10,7 @@ Mở `index.html` bằng trình duyệt. Cần có mạng để tải font Googl
 |---|---|
 | Nhân vật | Tự thiết kế nhân vật riêng trước, xin license Sanrio sau khi có người dùng. **Không dùng Kuromi** khi chưa có license |
 | 3D | Kết hợp 2D và 3D: 3D cho phòng thưởng, bản đồ thế giới và bài học hình khối; 2D cho đếm và tính toán |
-| Theme | Hồng là mặc định; có thể đổi sang Bạc hà hoặc Oải hương. Mọi màu lấy từ token CSS |
+| Theme | Hồng là mặc định; có thể đổi sang Bạc hà hoặc Oải hương. Theme chỉ đổi nền và môi trường; **Bông luôn giữ màu hồng** để nhận diện thương hiệu. Mọi màu lấy từ token CSS |
 | Cấu trúc | Một hành trình 7 cấp. Mở cấp tiếp theo khi đúng ngay lần đầu 4/5 câu |
 | Cách trả lời | Cấp 1–4 chọn đáp án; cấp 5–7 dùng bàn phím số, xếp que tính và tia số |
 | Thời gian | Không tính giờ. Phụ huynh có thể bật "Thử thách tốc độ": trả lời đúng trước khi hết giờ được thêm sao, không trừ điểm |
@@ -43,7 +43,7 @@ Bông đọc số theo quy tắc tiếng Việt: mười lăm, hai mươi mốt,
 
 - Chưa test trên thiết bị thật. Mới kiểm tra bằng Chromium headless ở khổ 1180×820 và 400×860.
 - Giọng đọc dùng Web Speech API, chỉ đọc khi thiết bị có giọng tiếng Việt.
-- Bông chỉ là nhân vật tạm, không dùng làm nhận diện thương hiệu.
+- Bông chỉ là nhân vật tạm, không dùng làm nhận diện thương hiệu. Brief đặt hàng họa sĩ nằm trong Claude Docs: "Brief thiết kế nhân vật Bông".
 - Tiến độ chỉ lưu trong `localStorage` của trình duyệt.
 - Môi trường test headless chỉ đạt khoảng 16 khung hình/giây. Bông phiêu lưu đã được chỉnh để máy yếu vẫn chạy đúng tốc độ, nhưng cần đo lại trên tablet thật.
 - Bản chính nên viết lại Bông phiêu lưu bằng Phaser, cùng engine mà ellaz-games đang dùng.
