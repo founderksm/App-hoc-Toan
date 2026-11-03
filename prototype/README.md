@@ -30,10 +30,20 @@ Mở `index.html` bằng trình duyệt. Cần có mạng để tải font Googl
 
 Bông đọc số theo quy tắc tiếng Việt: mười lăm, hai mươi mốt, hai mươi tư. Số 105 đọc "một trăm linh năm" hoặc "một trăm lẻ năm", phụ huynh chọn trong phần cài đặt.
 
+## Trò chơi ngoài hành trình
+
+| Trò | Cách chơi | Ghi chú thiết kế |
+|---|---|---|
+| **Đàn số** | Đàn 8 phím (Đô đến Đô). Mỗi câu, Bông đố một phép tính. Đáp án đúng nằm trên phím của nốt tiếp theo trong câu đầu bài "Ngôi sao lấp lánh", nên bấm đúng là đàn đúng giai điệu. Có 8 ô nhịp, tương ứng 8 phép tính. Bấm sai thì phím đó vẫn kêu theo cao độ của nó, Bông gợi ý; sai lần 2 thì phím đúng nhấp nháy | Giai điệu lấy từ bài dân gian Pháp thế kỷ 18 *Ah! vous dirai-je, maman*, thuộc phạm vi công cộng. Âm thanh tổng hợp bằng Web Audio. Chơi xong có thể nghe lại cả bài hoặc đàn tự do |
+| **Bông phiêu lưu** | Bông tự chạy trên đường. Mỗi lượt có 2 cổng số, một trên một dưới. Bé chạm vào cổng có số đúng (hoặc bấm nút "Cổng trên"/"Cổng dưới"). Chọn cổng trên thì Bông bay lên mây. Chạm chỗ khác để Bông nhảy chơi. Mỗi lượt có 6 cổng | Bông dừng lại chờ bé chọn nên không có áp lực thời gian và không có thua. Chọn sai thì Bông chỉ lắc nhẹ và chỉ ra cổng đúng. Vẽ bằng canvas 2D, màu lấy từ token theme. Bàn phím: ↑, ↓, phím cách |
+
+Độ khó của 2 trò đi theo cấp cao nhất bé đã mở: cấp 1–2 cộng trừ trong 10; cấp 3–4 trong 20, có qua 10; từ cấp 5 thêm tìm số còn thiếu. Riêng Bông phiêu lưu có thêm câu số liền trước, liền sau đến 200.
+
 ## Giới hạn đã biết
 
 - Chưa test trên thiết bị thật. Mới kiểm tra bằng Chromium headless ở khổ 1180×820 và 400×860.
 - Giọng đọc dùng Web Speech API, chỉ đọc khi thiết bị có giọng tiếng Việt.
 - Bông chỉ là nhân vật tạm, không dùng làm nhận diện thương hiệu.
 - Tiến độ chỉ lưu trong `localStorage` của trình duyệt.
-- "Đàn số" và "Bông phiêu lưu" mới có ô "Sắp có" trên trang chính, chờ chốt thiết kế.
+- Môi trường test headless chỉ đạt khoảng 16 khung hình/giây. Bông phiêu lưu đã được chỉnh để máy yếu vẫn chạy đúng tốc độ, nhưng cần đo lại trên tablet thật.
+- Bản chính nên viết lại Bông phiêu lưu bằng Phaser, cùng engine mà ellaz-games đang dùng.

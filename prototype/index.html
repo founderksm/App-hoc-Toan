@@ -24,6 +24,7 @@
   --font-display:"Baloo 2", ui-rounded, "Arial Rounded MT Bold", "Segoe UI", system-ui, sans-serif;
   --font-body:"Nunito", ui-rounded, "Segoe UI", system-ui, sans-serif;
   --r-lg:30px; --r-md:22px;
+  --key-1:#FF8FB1; --key-2:#FFB27A; --key-3:#FFD86B; --key-4:#9FE3C8; --key-5:#7FD3F0; --key-6:#A68AF5; --key-7:#D59BF5; --key-8:#FF8FB1;
   color-scheme:light;
 }
 :root[data-skin="mint"]{
@@ -296,6 +297,34 @@ button.cell{cursor:pointer}
 .shop-item .jelly{width:100%;justify-content:center;font-size:1.02rem;min-height:54px;padding:10px 12px;text-align:center}
 .blk{font-family:var(--font-display);font-weight:800;font-size:17px;fill:var(--ink)}
 
+/* Đàn số */
+.piano-top{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:center;background:var(--surface);border-radius:var(--r-lg);padding:14px 20px;box-shadow:0 6px 0 var(--line)}
+@media (max-width:700px){.piano-top{grid-template-columns:1fr}}
+.pq{display:flex;align-items:center;gap:14px;justify-content:center;flex-wrap:wrap}
+.pq .expr{font-size:clamp(2.2rem,6vw,3.4rem)}
+.qtext{margin:0;font-family:var(--font-display);font-weight:800;font-size:clamp(1.3rem,3.6vw,1.9rem);line-height:1.15;text-align:center}
+.piano{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:clamp(4px,1vw,10px);padding:clamp(10px,2vw,18px);background:var(--ink);border-radius:var(--r-lg);box-shadow:0 8px 0 var(--line)}
+.pkey{position:relative;border:0;cursor:pointer;background:var(--surface);border-radius:0 0 18px 18px;min-height:clamp(170px,32vh,260px);display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px;padding:10px 2px 18px;box-shadow:inset 0 -12px 0 var(--kc),0 4px 0 var(--shade);transition:transform .08s,box-shadow .08s,background-color .08s;min-width:0;color:var(--ink)}
+.pkey b{font-family:var(--font-display);font-weight:800;font-size:clamp(1.4rem,4.4vw,2.6rem);line-height:1;font-variant-numeric:tabular-nums}
+.pkey small{font-size:clamp(.6rem,1.8vw,.85rem);font-weight:800;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.04em}
+.pkey.down,.pkey:active{transform:translateY(4px);box-shadow:inset 0 -4px 0 var(--kc),0 1px 0 var(--shade);background:var(--kc)}
+.pkey.wrong{animation:wobble .45s ease}
+.pkey.hint{animation:keyhint 1s ease-in-out 3}
+@keyframes keyhint{0%,100%{background:var(--surface)}50%{background:var(--butter)}}
+.credit{margin:0;font-size:.82rem;font-weight:600;color:var(--ink-soft)}
+
+/* Bông phiêu lưu */
+.run-hud{display:flex;align-items:center;gap:14px;background:var(--surface);border-radius:var(--r-lg);padding:12px 20px;box-shadow:0 6px 0 var(--line)}
+.run-hud .grow{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:4px}
+.run-hud .expr{font-size:clamp(2rem,6vw,3.2rem)}
+.run-stage{position:relative;border-radius:var(--r-lg);overflow:hidden;box-shadow:0 8px 0 var(--line);height:clamp(300px,50vh,460px);background:var(--stage-bg)}
+.run-stage canvas{display:block;width:100%;height:100%;touch-action:manipulation;cursor:pointer}
+.run-stage .stage-bubble{max-width:min(46%,340px)}
+.gate-btns{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.gate-btns .jelly{justify-content:center;font-size:1.12rem;text-align:center}
+.gate-btns b{font-size:1.9rem;line-height:1;font-variant-numeric:tabular-nums}
+.gate-btns .jelly.picked{--fill:var(--tint-b);--lip:var(--tint-b-lip)}
+
 /* Bông 2D */
 .bong{overflow:visible;transform-origin:50% 92%}
 .bong.idle{animation:bob 3.2s ease-in-out infinite}
@@ -359,8 +388,8 @@ button.cell{cursor:pointer}
     <div class="tiles">
       <button class="tile t-a" type="button" data-go="journey"><span class="tag">7 cấp</span><span data-icon="map"></span><b>Hành trình số</b><span>Đếm số, cộng trừ trong 20, số đến 200</span></button>
       <button class="tile t-b" type="button" data-go="room"><span class="tag">3D</span><span data-icon="house"></span><b>Phòng của Bông</b><span>Dùng sao để trang trí căn phòng</span></button>
-      <button class="tile t-c" type="button" data-soon="Đàn số" aria-disabled="true"><span class="tag">Sắp có</span><span data-icon="piano"></span><b>Đàn số</b><span>Giải phép tính để chơi thành bản nhạc</span></button>
-      <button class="tile t-d" type="button" data-soon="Bông phiêu lưu" aria-disabled="true"><span class="tag">Sắp có</span><span data-icon="run"></span><b>Bông phiêu lưu</b><span>Điều khiển Bông chạy, nhảy, ăn đúng số</span></button>
+      <button class="tile t-c" type="button" data-go="piano"><span class="tag">Mới</span><span data-icon="piano"></span><b>Đàn số</b><span>Giải phép tính để chơi thành bản nhạc</span></button>
+      <button class="tile t-d" type="button" data-go="runner"><span class="tag">Mới</span><span data-icon="run"></span><b>Bông phiêu lưu</b><span>Bông chạy, bé chọn cổng có số đúng</span></button>
     </div>
 
     <aside class="note" aria-labelledby="note-title">
@@ -369,6 +398,7 @@ button.cell{cursor:pointer}
         <li>Hành trình 7 cấp, từ đếm số đến 20 tới số 200 và toán có lời văn. Đúng ngay lần đầu 4/5 câu thì mở cấp tiếp theo. Trong mỗi cấp, hình hỗ trợ giảm dần đến khi chỉ còn chữ số.</li>
         <li>Kiểm tra đầu vào gồm 6 câu, câu sau khó hay dễ tùy câu trước. Bông không báo đúng sai, cuối bài tự xếp bé vào cấp phù hợp.</li>
         <li>Cấp 1–4 chọn đáp án. Cấp 5–7 dùng bàn phím số, xếp que tính và tia số. Phụ huynh bật "Thử thách tốc độ" trong màn Hành trình.</li>
+        <li>Đàn số: mỗi phép tính đúng chơi một ô nhịp của bài "Ngôi sao lấp lánh". Bông phiêu lưu: Bông tự chạy, bé chạm vào cổng có số đúng. Bông dừng lại chờ bé chọn nên không có áp lực thời gian và không có thua. Độ khó của hai trò đi theo cấp bé đang học.</li>
         <li>Đổi giao diện bằng 3 chấm màu ở góc trên. Bông là nhân vật tạm, bản chính sẽ do họa sĩ thiết kế.</li>
         <li>Bé bắt đầu với 5 sao tặng thử. Tiến độ chỉ lưu trên trình duyệt này. <button class="linkish" type="button" id="btn-reset">Đặt lại bản mẫu</button></li>
       </ul>
@@ -423,6 +453,42 @@ button.cell{cursor:pointer}
       </div>
     </div>
     <div class="done-card" id="play-done" hidden></div>
+  </section>
+
+  <section class="screen" id="screen-piano" aria-labelledby="piano-title" hidden>
+    <div class="screen-head">
+      <button class="jelly soft back" type="button" data-go="home"><span data-icon="back"></span>Về nhà</button>
+      <h1 id="piano-title" tabindex="-1">Đàn số</h1>
+      <div class="head-right"><span class="chip">Ngôi sao lấp lánh</span><div class="progress" id="piano-progress" aria-label="Tiến độ bài nhạc"></div></div>
+    </div>
+    <div class="piano-top" id="piano-top">
+      <div class="coach"><span data-bong="idle" id="piano-bong"></span><p class="bubble left" id="piano-bubble" aria-live="polite">Bé tính rồi bấm phím có đáp án để chơi bài hát nhé!</p></div>
+      <div class="pq" id="piano-pq"><div id="piano-q"></div><button class="icon-btn" type="button" id="btn-piano-replay" aria-label="Nghe lại câu hỏi"></button></div>
+    </div>
+    <div class="done-card" id="piano-done" hidden></div>
+    <div class="piano" id="piano" role="group" aria-label="Đàn 8 phím"></div>
+    <p class="credit">Giai điệu "Ngôi sao lấp lánh" lấy từ bài dân gian Pháp thế kỷ 18 <i>Ah! vous dirai-je, maman</i>, thuộc phạm vi công cộng.</p>
+  </section>
+
+  <section class="screen" id="screen-runner" aria-labelledby="runner-title" hidden>
+    <div class="screen-head">
+      <button class="jelly soft back" type="button" data-go="home"><span data-icon="back"></span>Về nhà</button>
+      <h1 id="runner-title" tabindex="-1">Bông phiêu lưu</h1>
+      <div class="head-right"><div class="progress" id="run-progress" aria-label="Tiến độ đường chạy"></div></div>
+    </div>
+    <div class="run-hud" id="run-hud">
+      <div class="grow"><p class="eyebrow">Chạm vào cổng có số đúng</p><div id="run-q"><p class="qtext">Bông đang khởi động…</p></div></div>
+      <button class="icon-btn" type="button" id="btn-run-replay" aria-label="Nghe lại câu hỏi"></button>
+    </div>
+    <div class="run-stage" id="run-stage">
+      <canvas id="run-canvas" role="img" aria-label="Đường chạy của Bông. Chạm vào cổng có số đúng, chạm chỗ khác để Bông nhảy."></canvas>
+      <p class="bubble stage-bubble" id="run-bubble" aria-live="polite">Bông chạy nè! Chạm vào màn hình để Bông nhảy.</p>
+    </div>
+    <div class="gate-btns" id="gate-btns">
+      <button class="jelly soft" type="button" id="gate-up" data-lane="up" disabled><span data-icon="jump"></span>Cổng trên <b id="gate-up-n">?</b></button>
+      <button class="jelly soft" type="button" id="gate-down" data-lane="down" disabled><span data-icon="down"></span>Cổng dưới <b id="gate-down-n">?</b></button>
+    </div>
+    <div class="done-card" id="run-done" hidden></div>
   </section>
 
   <section class="screen" id="screen-room" aria-labelledby="room-title" hidden>
@@ -508,6 +574,7 @@ const ICONS = {
   sound: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M16 8.5c1.2 1 1.8 2.2 1.8 3.5s-.6 2.5-1.8 3.5M18.6 6c2 1.6 3 3.6 3 6s-1 4.4-3 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`,
   mute: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="m16.5 9.5 5 5m0-5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`,
   jump: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6m0 0-5 5m5-5 5 5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  down: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v13m0 0-5-5m5 5 5-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
   balloons: `<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M22 36 32 58M42 32 32 58M32 43v15" stroke="var(--ink-soft)" stroke-width="2" fill="none"/><ellipse cx="21" cy="24" rx="11" ry="13" fill="var(--primary)"/><ellipse cx="43" cy="20" rx="11" ry="13" fill="var(--lav-deep)"/><ellipse cx="32" cy="33" rx="10" ry="12" fill="var(--mint)"/></svg>`,
   cake: `<svg viewBox="0 0 64 64" aria-hidden="true"><rect x="12" y="34" width="40" height="21" rx="6" fill="var(--cream)" stroke="var(--line)" stroke-width="2"/><rect x="18" y="22" width="28" height="15" rx="5" fill="var(--primary)"/><path d="M13 38q5 5 10 0t10 0 10 0 10 0" fill="none" stroke="var(--primary)" stroke-width="4" stroke-linecap="round"/><rect x="30" y="11" width="4" height="11" rx="2" fill="var(--lav-deep)"/><ellipse cx="32" cy="8" rx="3" ry="4.5" fill="var(--butter-deep)"/></svg>`,
   flower: `<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 42V26" stroke="var(--leaf)" stroke-width="3.5" stroke-linecap="round"/><path d="M32 36q8-6 12-2-6 6-12 2Z" fill="var(--leaf)"/><path d="M20 42h24l-3 16H23Z" fill="var(--primary-deep)"/><g fill="var(--blush)"><circle cx="32" cy="9" r="6"/><circle cx="40.6" cy="15.2" r="6"/><circle cx="37.3" cy="25.3" r="6"/><circle cx="26.7" cy="25.3" r="6"/><circle cx="23.4" cy="15.2" r="6"/></g><circle cx="32" cy="18" r="5" fill="var(--butter)"/></svg>`,
@@ -651,7 +718,7 @@ function addStars(k, fromEl) { state.stars += k; persist(); renderShop(); flySta
 function applySkin(skin) {
   state.skin = skin; document.documentElement.dataset.skin = skin;
   $$('.skin').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.skin === skin)));
-  room?.applySkin(); persist();
+  room?.applySkin(); if (run.on) runColors(); persist();
 }
 function renderSound() {
   const b = $('#btn-sound'); b.innerHTML = state.sound ? ICONS.sound : ICONS.mute;
@@ -667,10 +734,12 @@ function renderSettings() {
 /* ---------- Chuyển màn hình ---------- */
 function showScreen(name, focus = true) {
   state.screen = name;
-  for (const s of ['home', 'journey', 'play', 'room']) $('#screen-' + s).hidden = s !== name;
+  for (const s of ['home', 'journey', 'play', 'piano', 'runner', 'room']) $('#screen-' + s).hidden = s !== name;
   window.scrollTo(0, 0);
   if (name !== 'play') { stopTimer(); try { speechSynthesis.cancel(); } catch { /* bỏ qua */ } }
   if (name === 'journey') renderJourney();
+  if (name === 'piano' && !piano.active && !piano.free) startPiano();
+  if (name === 'runner') { if (run.on) resumeRun(); else startRun(); } else pauseRun();
   if (name === 'room') enterRoom(); else room?.pause();
   if (focus) $(`#screen-${name} h1`)?.focus({ preventScroll: true });
 }
@@ -1029,10 +1098,15 @@ function placementAnswer(ok, el) {
   setTimeout(nextQuestion, 1200);
 }
 function doneHTML(o) {
-  return `${bongSVG('cheer')}<h2 tabindex="-1" id="done-title">${o.title}</h2><p>${o.text}</p>
+  const acts = o.actions || [
+    { label: o.label, action: o.action },
+    { label: 'Về hành trình', go: 'journey', icon: 'map', soft: true },
+    { label: 'Vào phòng của Bông', go: 'room', icon: 'house', soft: true },
+  ];
+  return `${bongSVG('cheer')}<h2 tabindex="-1" class="done-title">${o.title}</h2><p>${o.text}</p>
     ${o.rating ? `<div class="rating" aria-label="${o.rating} trên 3 sao">${[1, 2, 3].map((s) => (s <= o.rating ? ICONS.coin : ICONS.coinEmpty)).join('')}</div>` : ''}
     ${o.extra ? `<p class="unlock">${o.extra}</p>` : ''}
-    <div class="done-actions"><button class="jelly" type="button" data-action="${o.action}">${o.label}</button><button class="jelly soft" type="button" data-go="journey">${ICONS.map}Về hành trình</button><button class="jelly soft" type="button" data-go="room">${ICONS.house}Vào phòng của Bông</button></div>`;
+    <div class="done-actions">${acts.map((a) => `<button class="jelly${a.soft ? ' soft' : ''}" type="button" ${a.go ? `data-go="${a.go}"` : `data-action="${a.action}"`}>${a.icon ? ICONS[a.icon] : ''}${a.label}</button>`).join('')}</div>`;
 }
 function finish() {
   stopTimer(); $('#timer').hidden = true;
@@ -1055,8 +1129,9 @@ function finish() {
       label: pass && hasNext ? `Sang Cấp ${k + 1}` : 'Chơi lại cấp này', action: `level:${pass && hasNext ? k + 1 : k}` });
     say(pass ? `Giỏi quá! ${extra}` : 'Bé cố lên nhé! Mình chơi lại cấp này nha.');
   }
-  SFX.correct(); burst($('#done-title')); mood($('#play-done .bong'), 'cheer');
-  $('#done-title').focus({ preventScroll: true });
+  const title = d.querySelector('.done-title');
+  SFX.correct(); burst(title); mood(d.querySelector('.bong'), 'cheer');
+  title.focus({ preventScroll: true });
 }
 
 /* ---------- Hành trình ---------- */
@@ -1350,6 +1425,322 @@ async function buildRoom(THREE, host) {
   return api;
 }
 
+/* ---------- Câu hỏi chung cho Đàn số và Bông phiêu lưu ---------- */
+function levelPool(forPiano) {
+  const u = state.progress.unlocked;
+  if (u <= 2) return [qAdd10];
+  if (u <= 4) return [qAdd20No, qMake10, qMake10];
+  return forPiano ? [qAdd20No, qMake10, qGap] : [qAdd20No, qMake10, qGap, () => qNeighbor(11, 199)];
+}
+const gameQ = (forPiano) => pick(levelPool(forPiano))(4, { placement: true });
+function qDisplay(q) {
+  if (q.tokens) return exprHTML(q.tokens).replace(' id="qbox"', '');
+  if (q.type === 'arith') return exprHTML([q.a, q.op, q.b, '=', '?']).replace(' id="qbox"', '');
+  return `<p class="qtext">${q.prompt}</p>`;
+}
+
+/* ---------- Đàn số ---------- */
+const NOTES = [
+  { n: 'Đô', f: 261.63 }, { n: 'Rê', f: 293.66 }, { n: 'Mi', f: 329.63 }, { n: 'Fa', f: 349.23 },
+  { n: 'Sol', f: 392.0 }, { n: 'La', f: 440.0 }, { n: 'Si', f: 493.88 }, { n: 'Đô', f: 523.25 },
+];
+// Câu đầu "Ngôi sao lấp lánh": mỗi phép tính đúng chơi một ô nhịp; phím mang đáp án chính là nốt của ô nhịp đó
+const SONG = [[0, 0], [4, 4], [5, 5], [4], [3, 3], [2, 2], [1, 1], [0]];
+const piano = { active: false, free: false, i: 0, q: null, key: 0, labels: [], locked: false, firstTry: true, misses: 0, earned: 0, firstOk: 0 };
+function pianoTone(freq, delay = 0, dur = 0.5) {
+  if (!state.sound) return;
+  const a = ac(); if (!a) return;
+  const t = a.currentTime + delay, out = a.createGain();
+  out.gain.setValueAtTime(0.0001, t); out.gain.exponentialRampToValueAtTime(0.2, t + 0.012); out.gain.exponentialRampToValueAtTime(0.0001, t + dur + 0.6);
+  out.connect(a.destination);
+  for (const [m, type, v] of [[1, 'triangle', 1], [2, 'sine', 0.3], [3, 'sine', 0.1]]) {
+    const o = a.createOscillator(), g = a.createGain();
+    o.type = type; o.frequency.setValueAtTime(freq * m, t); g.gain.value = v;
+    o.connect(g).connect(out); o.start(t); o.stop(t + dur + 0.7);
+  }
+}
+function flashKey(k, delayMs = 0, holdMs = 240) {
+  setTimeout(() => { const el = $(`.pkey[data-k="${k}"]`); if (!el) return; el.classList.add('down'); setTimeout(() => el.classList.remove('down'), holdMs); }, delayMs);
+}
+function playBar(bar, start = 0) {
+  const beat = bar.length > 1 ? 0.42 : 0.8;
+  bar.forEach((k, j) => { const at = start + j * beat; pianoTone(NOTES[k].f, at, beat); flashKey(k, at * 1000, beat * 650); });
+  return start + bar.length * beat;
+}
+function replaySong() { let t = 0; for (const bar of SONG) t = playBar(bar, t); }
+function spread(ans, count) {
+  const out = [];
+  for (let d = 1; out.length < count && d < 60; d++) for (const c of [ans + d, ans - d]) if (c >= 0 && out.length < count) out.push(c);
+  return shuffle(out);
+}
+function renderKeys(mode) {
+  $('#piano').innerHTML = NOTES.map((nt, k) => {
+    const label = mode === 'notes' ? nt.n : piano.labels[k];
+    return `<button class="pkey" type="button" data-k="${k}" style="--kc:var(--key-${k + 1})" aria-label="${mode === 'notes' ? `Phím ${nt.n}` : `Phím số ${label}`}"><b>${label}</b><small>${mode === 'notes' ? '' : nt.n}</small></button>`;
+  }).join('');
+}
+function renderPianoProgress(all = false) {
+  $('#piano-progress').innerHTML = SONG.map((_, i) => `<i class="${all || i < piano.i ? 'done' : i === piano.i ? 'now' : ''}"></i>`).join('');
+}
+function startPiano() {
+  Object.assign(piano, { active: true, free: false, i: 0, earned: 0, firstOk: 0 });
+  $('#piano-done').hidden = true; $('#piano-top').hidden = false; $('#piano-pq').hidden = false;
+  nextPianoQ();
+}
+function nextPianoQ() {
+  if (!piano.active) return;
+  if (piano.i >= SONG.length) { finishPiano(); return; }
+  const q = gameQ(true), key = SONG[piano.i][0], others = spread(q.answer, 7);
+  piano.labels = NOTES.map((_, k) => (k === key ? q.answer : others.pop()));
+  Object.assign(piano, { q, key, locked: false, firstTry: true, misses: 0 });
+  $('#piano-q').innerHTML = qDisplay(q);
+  renderKeys('numbers'); renderPianoProgress();
+  setBubble('#piano-bubble', piano.i === 0 ? 'Bé tính rồi bấm phím có đáp án. Bấm đúng là đàn hát luôn!' : pick(['Phím nào đây bé?', 'Tiếp nào!', 'Bé đàn hay quá!']), false);
+  say(q.speak);
+}
+function pressKey(el) {
+  const k = Number(el.dataset.k);
+  if (!piano.active) { pianoTone(NOTES[k].f, 0, 0.5); flashKey(k, 0, 200); return; }
+  if (piano.locked) return;
+  if (k === piano.key) {
+    piano.locked = true; piano.earned++; if (piano.firstTry) piano.firstOk++;
+    const end = playBar(SONG[piano.i]);
+    mood($('#piano-bong'), 'cheer'); burst(el);
+    const box = $('#piano-q .qbox'); if (box) { box.textContent = piano.q.answer; box.classList.add('filled'); }
+    setBubble('#piano-bubble', `Đúng rồi! ${piano.q.reveal}`, false);
+    addStars(1, el);
+    piano.i++;
+    setTimeout(nextPianoQ, end * 1000 + 700);
+  } else {
+    piano.firstTry = false; piano.misses++;
+    pianoTone(NOTES[k].f, 0, 0.3); el.classList.remove('wrong'); void el.offsetWidth; el.classList.add('wrong');
+    mood($('#piano-bong'), 'think');
+    if (piano.misses >= 2) {
+      const c = $(`.pkey[data-k="${piano.key}"]`); if (c) { c.classList.remove('hint'); void c.offsetWidth; c.classList.add('hint'); }
+      setBubble('#piano-bubble', `Mình cùng xem nhé: ${piano.q.reveal}`);
+    } else setBubble('#piano-bubble', piano.q.hint);
+  }
+}
+function finishPiano() {
+  piano.active = false; renderPianoProgress(true);
+  $('#piano-top').hidden = true; renderKeys('notes');
+  const d = $('#piano-done'); d.hidden = false;
+  d.innerHTML = doneHTML({
+    title: 'Bé đàn xong rồi!', text: `Bé chơi trọn câu đầu bài "Ngôi sao lấp lánh", đúng ngay lần đầu ${piano.firstOk}/${SONG.length} phím và nhận ${piano.earned} ngôi sao.`,
+    rating: piano.firstOk >= 7 ? 3 : piano.firstOk >= 5 ? 2 : 1,
+    actions: [{ label: 'Nghe lại cả bài', action: 'piano:replay' }, { label: 'Đàn lượt mới', action: 'piano:again', soft: true }, { label: 'Đàn tự do', action: 'piano:free', soft: true }, { label: 'Về nhà', go: 'home', soft: true }],
+  });
+  const title = d.querySelector('.done-title'); burst(title); mood(d.querySelector('.bong'), 'cheer'); title.focus({ preventScroll: true });
+  setTimeout(replaySong, 700);
+}
+function pianoFree() {
+  piano.active = false; piano.free = true;
+  $('#piano-done').hidden = true; $('#piano-top').hidden = false; $('#piano-pq').hidden = true;
+  renderKeys('notes');
+  setBubble('#piano-bubble', 'Bé đàn tự do nhé! Thử chơi Đô Đô Sol Sol La La Sol xem.', false);
+}
+
+/* ---------- Bông phiêu lưu ---------- */
+const RUN_TOTAL = 6;
+const FONT_D = '"Baloo 2", "Nunito", ui-rounded, sans-serif';
+const RUN_TOKENS = ['--surface', '--line', '--primary', '--primary-deep', '--ink', '--lav-deep', '--mint', '--mint-deep', '--butter', '--butter-deep', '--berry', '--leaf', '--floor', '--tint-b', '--tint-c', '--bong-body', '--bong-belly', '--bong-ear', '--blush', '--stage-bg'];
+const run = { on: false, raf: 0, last: 0, w: 0, h: 0, s: 1, dpr: 1, dist: 0, speed: 0, i: 0, q: null, gate: null, choice: null, y: 0, hop: 0, vy: 0, bump: 0, earned: 0, firstOk: 0, sparks: [], col: {}, gap: 0, waitSaid: false };
+const groundY = () => run.h * 0.8;
+const upperY = () => groundY() - 150 * run.s;
+const bongX = () => Math.max(70, run.w * 0.2);
+const baseSpeed = () => 190 * run.s;
+function runColors() { run.col = Object.fromEntries(RUN_TOKENS.map((k) => [k, cssVar(k)])); }
+function resizeRun() {
+  const st = $('#run-stage'), cv = $('#run-canvas'), w = st.clientWidth, h = st.clientHeight;
+  if (!w || !h) return;
+  const dpr = Math.min(window.devicePixelRatio || 1, 2), onGround = !run.h || Math.abs(run.y - groundY()) < 2;
+  cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
+  Object.assign(run, { w, h, dpr, s: Math.max(0.62, Math.min(w / 640, h / 380, 1.3)) });
+  if (onGround) run.y = groundY();
+  if (run.on) drawRun();
+}
+function renderRunProgress(all = false) {
+  $('#run-progress').innerHTML = Array.from({ length: RUN_TOTAL }, (_, i) => `<i class="${all || i < run.i ? 'done' : i === run.i ? 'now' : ''}"></i>`).join('');
+}
+function setGateButtons(g) {
+  $('#gate-up-n').textContent = g ? g.up : '?'; $('#gate-down-n').textContent = g ? g.down : '?';
+  for (const id of ['#gate-up', '#gate-down']) { const b = $(id); b.disabled = !g || !!run.choice || !!g.result; b.classList.remove('picked'); }
+}
+function startRun() {
+  Object.assign(run, { on: true, i: 0, earned: 0, firstOk: 0, dist: 0, gate: null, choice: null, q: null, hop: 0, vy: 0, bump: 0, sparks: [], gap: 1.4, waitSaid: false });
+  $('#run-done').hidden = true;
+  for (const id of ['#run-hud', '#run-stage', '#gate-btns']) $(id).hidden = false;
+  runColors(); resizeRun(); run.y = groundY(); run.speed = baseSpeed();
+  $('#run-q').innerHTML = '<p class="qtext">Bông đang khởi động…</p>';
+  renderRunProgress(); setGateButtons(null);
+  setBubble('#run-bubble', 'Bông chạy nè! Chạm vào màn hình để Bông nhảy.', false);
+  resumeRun();
+}
+function resumeRun() { cancelAnimationFrame(run.raf); resizeRun(); run.last = 0; if (run.on) run.raf = requestAnimationFrame(runFrame); }
+function pauseRun() { cancelAnimationFrame(run.raf); run.raf = 0; }
+function runFrame(now) {
+  if (!run.on) return;
+  const dt = run.last ? Math.min((now - run.last) / 1000, 0.1) : 0.016; run.last = now; // máy yếu vẫn chạy đúng tốc độ
+  stepRun(dt);
+  if (!run.on) return;
+  drawRun();
+  run.raf = requestAnimationFrame(runFrame);
+}
+function spawnGate() {
+  const q = gameQ(false), wrongs = near(q.answer, 0, 200).filter((v) => v !== q.answer);
+  const wrong = wrongs.length ? pick(wrongs) : q.answer + 1, up = Math.random() < 0.5;
+  Object.assign(run, { q, choice: null, waitSaid: false });
+  run.gate = { x: run.w + 70 * run.s, up: up ? q.answer : wrong, down: up ? wrong : q.answer, right: up ? 'up' : 'down', result: null };
+  $('#run-q').innerHTML = qDisplay(q);
+  setGateButtons(run.gate);
+  say(q.speak);
+}
+function chooseLane(lane) {
+  const g = run.gate; if (!run.on || !g || run.choice || g.result) return;
+  run.choice = lane; SFX.pop();
+  $('#gate-up').disabled = true; $('#gate-down').disabled = true;
+  $(lane === 'up' ? '#gate-up' : '#gate-down').classList.add('picked');
+  setBubble('#run-bubble', lane === 'up' ? `Bông bay lên cổng ${g.up}!` : `Bông chạy qua cổng ${g.down}!`, false);
+}
+function runHop() { if (run.on && run.hop === 0) { run.vy = 560 * run.s; run.hop = 0.01; SFX.jump(); } }
+function gateRect(lane) {
+  const g = run.gate, s = run.s, gw = 104 * s, gh = 150 * s, foot = lane === 'up' ? upperY() : groundY();
+  return { x: g.x - gw / 2, y: foot - gh, w: gw, h: gh + 10 * s };
+}
+function runTap(e) {
+  if (!run.on) return; ac();
+  const r = $('#run-canvas').getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top, g = run.gate;
+  if (g && !run.choice && !g.result) {
+    for (const lane of ['up', 'down']) { const b = gateRect(lane); if (x >= b.x && x <= b.x + b.w && y >= b.y && y <= b.y + b.h) { chooseLane(lane); return; } }
+  }
+  runHop();
+}
+function sparkBurst(x, y) {
+  if (reduceMotion()) return;
+  const cols = ['--berry', '--butter', '--mint', '--lav-deep', '--primary'].map((k) => run.col[k]);
+  for (let i = 0; i < 26; i++) {
+    const a = Math.random() * Math.PI * 2, sp = (120 + Math.random() * 220) * run.s;
+    run.sparks.push({ x, y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp - 160 * run.s, r: (4 + Math.random() * 5) * run.s, c: pick(cols), life: 0.9, max: 0.9 });
+  }
+}
+function judgeGate() {
+  const g = run.gate, q = run.q, ok = (run.choice || 'down') === g.right;
+  g.result = ok ? 'right' : 'wrong'; run.i++; renderRunProgress();
+  const box = $('#run-q .qbox'); if (box) { box.textContent = q.answer; box.classList.add('filled'); }
+  if (ok) {
+    run.earned++; run.firstOk++;
+    SFX.correct(); sparkBurst(bongX(), run.y - 40 * run.s);
+    setBubble('#run-bubble', `Đúng rồi! ${q.reveal}`, false); say(`Đúng rồi! ${answerWords(q)}`);
+    addStars(1, $('#run-stage'));
+  } else {
+    run.bump = 0.5; SFX.soft();
+    setBubble('#run-bubble', `Ối, chưa đúng rồi. ${q.reveal}. Cổng ${q.answer} ở ${g.right === 'up' ? 'trên' : 'dưới'} đó!`);
+  }
+}
+function stepRun(dt) {
+  const s = run.s, bx = bongX(), g = run.gate;
+  if (!g) {
+    run.gap -= dt;
+    if (run.gap <= 0) { if (run.i >= RUN_TOTAL) { finishRun(); return; } spawnGate(); }
+  }
+  let target = baseSpeed();
+  if (g && !run.choice && !g.result && g.x - bx < 240 * s) {
+    target = 0;
+    if (!run.waitSaid) { run.waitSaid = true; setBubble('#run-bubble', 'Bông chờ bé chọn cổng nhé!', false); }
+  }
+  run.speed += (target - run.speed) * Math.min(1, dt * 5);
+  const dx = run.speed * dt; run.dist += dx;
+  if (g) {
+    g.x -= dx;
+    if (!g.result && g.x <= bx) judgeGate();
+    if (g.x < -140 * s) { run.gate = null; run.choice = null; run.gap = 1.1; setGateButtons(null); }
+  }
+  const up = run.choice === 'up' && run.gate && run.gate.x > bx - 110 * s;
+  run.y += ((up ? upperY() : groundY()) - run.y) * Math.min(1, dt * 6);
+  if (run.vy !== 0 || run.hop > 0) { run.vy -= 1500 * s * dt; run.hop += run.vy * dt; if (run.hop <= 0) { run.hop = 0; run.vy = 0; } }
+  if (run.bump > 0) run.bump -= dt;
+  run.sparks = run.sparks.filter((p) => (p.life -= dt) > 0);
+  for (const p of run.sparks) { p.x += p.vx * dt; p.y += p.vy * dt; p.vy += 500 * dt; }
+}
+function finishRun() {
+  run.on = false; pauseRun(); renderRunProgress(true); setGateButtons(null);
+  for (const id of ['#run-hud', '#run-stage', '#gate-btns']) $(id).hidden = true;
+  const d = $('#run-done'); d.hidden = false;
+  d.innerHTML = doneHTML({
+    title: 'Bông về đích!', text: `Bé chọn đúng ${run.firstOk}/${RUN_TOTAL} cổng và nhận ${run.earned} ngôi sao.`,
+    rating: run.firstOk >= 5 ? 3 : run.firstOk >= 3 ? 2 : 1,
+    actions: [{ label: 'Chạy lượt mới', action: 'run:again' }, { label: 'Về nhà', go: 'home', soft: true }, { label: 'Vào phòng của Bông', go: 'room', icon: 'house', soft: true }],
+  });
+  const title = d.querySelector('.done-title'); SFX.correct(); burst(title); mood(d.querySelector('.bong'), 'cheer'); title.focus({ preventScroll: true });
+  say(`Bông về đích rồi! Bé chọn đúng ${readVi(run.firstOk)} cổng.`);
+}
+
+/* Vẽ đường chạy bằng canvas 2D, màu lấy từ token theme */
+function rr(c, x, y, w, h, r) { c.beginPath(); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r); c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath(); }
+function ell(c, x, y, rx, ry, color, alpha = 1) { c.globalAlpha = alpha; c.fillStyle = color; c.beginPath(); c.ellipse(x, y, rx, ry, 0, 0, Math.PI * 2); c.fill(); c.globalAlpha = 1; }
+function star5(c, x, y, r) { c.beginPath(); for (let i = 0; i < 10; i++) { const a = -Math.PI / 2 + (i * Math.PI) / 5, q = i % 2 ? r * 0.45 : r; c.lineTo(x + Math.cos(a) * q, y + Math.sin(a) * q); } c.closePath(); c.fill(); }
+function cloud(c, x, y, k, color) { ell(c, x, y, 34 * k, 16 * k, color); ell(c, x - 22 * k, y + 4 * k, 20 * k, 12 * k, color); ell(c, x + 24 * k, y + 3 * k, 22 * k, 13 * k, color); ell(c, x + 4 * k, y - 10 * k, 20 * k, 14 * k, color); }
+function hills(c, off, base, amp, len, color) {
+  c.fillStyle = color; c.beginPath(); c.moveTo(0, base);
+  for (let x = 0; x <= run.w + 12; x += 12) c.lineTo(x, base - amp * (0.55 + 0.45 * Math.sin(((x + off) / len) * Math.PI)));
+  c.lineTo(run.w, base); c.closePath(); c.fill();
+}
+function drawGate(c, g, lane, foot, s) {
+  const col = run.col, gw = 92 * s, gh = 112 * s, x = g.x, top = foot - gh;
+  let fill = col['--lav-deep'];
+  if (run.choice === lane && !g.result) fill = col['--primary-deep'];
+  if (g.result) fill = lane === g.right ? col['--mint-deep'] : lane === (run.choice || 'down') ? col['--berry'] : col['--line'];
+  c.fillStyle = fill;
+  rr(c, x - gw / 2, top + 30 * s, 15 * s, gh - 30 * s, 6 * s); c.fill();
+  rr(c, x + gw / 2 - 15 * s, top + 30 * s, 15 * s, gh - 30 * s, 6 * s); c.fill();
+  c.lineWidth = 15 * s; c.strokeStyle = fill; c.lineCap = 'round';
+  c.beginPath(); c.arc(x, top + 34 * s, gw / 2 - 7.5 * s, Math.PI, 0); c.stroke();
+  const pr = 27 * s, py = top + 2 * s, n = String(lane === 'up' ? g.up : g.down);
+  c.fillStyle = col['--surface']; c.beginPath(); c.arc(x, py, pr, 0, Math.PI * 2); c.fill();
+  c.lineWidth = 5 * s; c.strokeStyle = fill; c.stroke();
+  c.fillStyle = col['--ink']; c.font = `800 ${(n.length > 2 ? 21 : 26) * s}px ${FONT_D}`; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText(n, x, py + 2 * s);
+}
+function drawRunner(c, x, foot, s) {
+  const col = run.col, k = s * 0.95, gY = groundY(), onCloud = run.y < gY - 20 * s;
+  const step = Math.sin(run.dist / (14 * s)), air = run.hop > 1 || (!onCloud && Math.abs(run.y - gY) > 4);
+  if (onCloud) cloud(c, x, run.y + 10 * s, 0.9 * s, col['--surface']);
+  else ell(c, x, gY + 4 * s, 26 * k * Math.max(0.5, 1 - run.hop / (200 * s)), 6 * k, col['--ink'], 0.15);
+  const swing = air ? 0 : step * 8 * k, y = foot - 36 * k - (air ? 0 : Math.abs(step) * 3 * k);
+  ell(c, x - 12 * k + swing, foot - 5 * k, 11 * k, 6 * k, col['--bong-ear']);
+  ell(c, x + 12 * k - swing, foot - 5 * k, 11 * k, 6 * k, col['--bong-ear']);
+  for (const ex of [-21, 23]) { ell(c, x + ex * k, y - 27 * k, 11 * k, 11 * k, col['--bong-body']); ell(c, x + ex * k, y - 27 * k, 6 * k, 6 * k, col['--bong-ear']); }
+  c.strokeStyle = col['--leaf']; c.lineWidth = 3.5 * k; c.lineCap = 'round';
+  c.beginPath(); c.moveTo(x + k, y - 30 * k); c.quadraticCurveTo(x - 2 * k, y - 38 * k, x + k, y - 45 * k); c.stroke();
+  c.fillStyle = col['--butter']; star5(c, x + k, y - 50 * k, 9 * k); c.strokeStyle = col['--butter-deep']; c.lineWidth = 1.5 * k; c.stroke();
+  ell(c, x, y, 36 * k, 32 * k, col['--bong-body']);
+  ell(c, x + 4 * k, y + 11 * k, 20 * k, 14 * k, col['--bong-belly']);
+  ell(c, x - 30 * k, y + 6 * k - step * 4 * k, 7 * k, 10 * k, col['--bong-body']);
+  if (Math.floor(performance.now() / 150) % 30 === 0) { c.fillStyle = col['--ink']; c.fillRect(x - 2.5 * k, y - 6 * k, 9 * k, 2.5 * k); c.fillRect(x + 15.5 * k, y - 6 * k, 9 * k, 2.5 * k); }
+  else { for (const ex of [2, 20]) { ell(c, x + ex * k, y - 6 * k, 4.6 * k, 6 * k, col['--ink']); ell(c, x + (ex + 1.5) * k, y - 8.5 * k, 1.6 * k, 1.6 * k, col['--surface']); } }
+  ell(c, x - 8 * k, y + 5 * k, 6 * k, 3.6 * k, col['--blush'], 0.55); ell(c, x + 29 * k, y + 5 * k, 5 * k, 3.6 * k, col['--blush'], 0.55);
+  c.strokeStyle = col['--ink']; c.lineWidth = 2.6 * k; c.beginPath(); c.arc(x + 11 * k, y + 2 * k, 5 * k, 0.15 * Math.PI, 0.85 * Math.PI); c.stroke();
+}
+function drawRun() {
+  const c = $('#run-canvas').getContext('2d'), { w, h, s, col } = run; if (!w || !col['--surface']) return;
+  const gY = groundY(), uY = upperY(), bx = bongX();
+  c.setTransform(run.dpr, 0, 0, run.dpr, 0, 0);
+  const sky = c.createLinearGradient(0, 0, 0, gY); sky.addColorStop(0, col['--stage-bg']); sky.addColorStop(1, col['--surface']);
+  c.fillStyle = sky; c.fillRect(0, 0, w, h);
+  const span = w + 320 * s;
+  for (let i = 0; i < 4; i++) { const x = ((((i * 300 * s - run.dist * 0.15) % span) + span) % span) - 160 * s; cloud(c, x, (46 + (i % 2) * 44) * s, s, col['--surface']); }
+  hills(c, run.dist * 0.3, gY, 95 * s, 240 * s, col['--tint-b']);
+  hills(c, run.dist * 0.6 + 100, gY, 55 * s, 170 * s, col['--tint-c']);
+  c.fillStyle = col['--floor']; c.fillRect(0, gY, w, h - gY);
+  c.globalAlpha = 0.6; c.fillStyle = col['--surface'];
+  for (let x = -(run.dist % (64 * s)); x < w; x += 64 * s) { rr(c, x, gY + 16 * s, 30 * s, 8 * s, 4 * s); c.fill(); }
+  c.globalAlpha = 1;
+  const g = run.gate;
+  if (g) { cloud(c, g.x, uY + 10 * s, 1.25 * s, col['--surface']); drawGate(c, g, 'up', uY, s); drawGate(c, g, 'down', gY, s); }
+  drawRunner(c, bx + (run.bump > 0 ? Math.sin(run.bump * 40) * 6 * s : 0), run.y - run.hop, s);
+  for (const p of run.sparks) { c.globalAlpha = Math.max(0, p.life / p.max); c.fillStyle = p.c; star5(c, p.x, p.y, p.r); }
+  c.globalAlpha = 1;
+}
+
 /* ---------- Khởi động ---------- */
 function bind() {
   document.addEventListener('click', (e) => {
@@ -1357,9 +1748,15 @@ function bind() {
     const go = t.closest('[data-go]');
     if (go) { SFX.pop(); ac(); showScreen(go.dataset.go); return; }
     const act = t.closest('[data-action]');
-    if (act) { const [kind, val] = act.dataset.action.split(':'); if (kind === 'level') { SFX.pop(); startLevel(Number(val)); } return; }
-    const soon = t.closest('[data-soon]');
-    if (soon) { SFX.soft(); mood($('#home-bong'), 'think'); setBubble('#home-bubble', `Trò ${soon.dataset.soon} Bông đang chuẩn bị, bé quay lại sau nhé!`); return; }
+    if (act) {
+      const [kind, val] = act.dataset.action.split(':'); ac();
+      if (kind === 'level') { SFX.pop(); startLevel(Number(val)); }
+      if (kind === 'piano') { if (val === 'again') startPiano(); else if (val === 'replay') replaySong(); else if (val === 'free') pianoFree(); }
+      if (kind === 'run') startRun();
+      return;
+    }
+    const pkey = t.closest('.pkey'); if (pkey) { ac(); pressKey(pkey); return; }
+    const lane = t.closest('[data-lane]'); if (lane) { ac(); chooseLane(lane.dataset.lane); return; }
     const skin = t.closest('.skin');
     if (skin) { SFX.pop(); applySkin(skin.dataset.skin); return; }
     const node = t.closest('.node');
@@ -1382,6 +1779,10 @@ function bind() {
     const buyBtn = t.closest('[data-buy]'); if (buyBtn) buy(buyBtn.dataset.buy);
   });
   document.addEventListener('keydown', (e) => {
+    if (state.screen === 'runner' && run.on) {
+      if (e.key === 'ArrowUp') { e.preventDefault(); chooseLane('up'); } else if (e.key === 'ArrowDown') { e.preventDefault(); chooseLane('down'); } else if (e.key === ' ' && e.target === document.body) { e.preventDefault(); runHop(); }
+      return;
+    }
     if (state.screen !== 'play' || sess?.q?.input !== 'keypad' || sess.locked) return;
     if (/^[0-9]$/.test(e.key)) kpPress(e.key); else if (e.key === 'Backspace') kpPress('del'); else if (e.key === 'Enter') { e.preventDefault(); kpPress('ok'); }
   });
@@ -1400,6 +1801,12 @@ function bind() {
     setBubble('#home-bubble', 'Bông đã dọn phòng, đưa bé về đầu hành trình và tặng lại 5 sao!', false);
   });
   new ResizeObserver(() => layoutJourney()).observe($('#journey'));
+  $('#btn-piano-replay').innerHTML = ICONS.sound;
+  $('#btn-piano-replay').addEventListener('click', () => { if (piano.q) say(piano.q.speak); });
+  $('#btn-run-replay').innerHTML = ICONS.sound;
+  $('#btn-run-replay').addEventListener('click', () => { if (run.q) say(run.q.speak); });
+  $('#run-canvas').addEventListener('pointerdown', runTap);
+  new ResizeObserver(() => resizeRun()).observe($('#run-stage'));
 }
 
 function start(data) {
