@@ -1,0 +1,151 @@
+{
+  "meta": {
+    "purpose": "Đánh giá repo mã nguồn mở web app học toán tư duy cho trẻ 5–6 tuổi, làm nền fork để thương mại hóa",
+    "collected_at": "2026-11-03",
+    "sources": [
+      "GitHub Search API (search/repositories), 70 truy vấn, sắp xếp theo stars, tối đa 50 kết quả/truy vấn",
+      "Web search (danh sách awesome, PhET, bài tổng hợp)",
+      "git clone toàn bộ lịch sử để đếm commit/tác giả, đọc LICENSE và mã nguồn"
+    ],
+    "raw_unique_repos": 2267,
+    "after_hard_filter": 211,
+    "deep_evaluated": 6,
+    "hard_filters": [
+      "Web app thuần (JS/TS/HTML, React/Vue/Svelte/Preact, Phaser)",
+      "License code: MIT / Apache-2.0 / BSD / ISC",
+      "License asset (hình, âm thanh, nội dung) cho phép thương mại",
+      "Nội dung phù hợp 5–6 tuổi",
+      "Có yếu tố game"
+    ],
+    "weights": {
+      "A_age_pedagogy": 25,
+      "B_game_ux": 20,
+      "C_architecture": 20,
+      "D_community": 15,
+      "E_maintenance": 10,
+      "F_localization": 10
+    },
+    "verification_legend": {
+      "verified_api": "Lấy từ GitHub Search API ngày 2026-11-03",
+      "verified_git": "Đếm từ lịch sử git sau khi clone",
+      "verified_code": "Đọc trực tiếp LICENSE/mã nguồn",
+      "not_run": "Chưa chạy thử: build bị chặn bởi chính sách bảo mật, demo bị chặn bởi network policy của môi trường"
+    },
+    "search_queries": [
+      "math game kids", "math games for kids", "kids math game", "math game children", "preschool math",
+      "kindergarten math", "early math game", "counting game kids", "number sense game", "math learning game",
+      "educational math game", "learning games for kids", "educational games children", "toddler learning game",
+      "preschool games", "kids educational game html5", "math puzzle kids", "math practice kids",
+      "first grade math game", "math for kids", "toan tu duy", "hoc toan", "toán tư duy", "học toán",
+      "math app kids react", "phaser educational game", "number game kids", "maths game children",
+      "math adventure game", "learn numbers kids", "ten frame", "subitizing", "number line kids", "pre-k math",
+      "early childhood math", "montessori math", "montessori app", "shapes game kids", "pattern game kids",
+      "logic game kids", "counting kids", "kids learning games", "kids learning app", "children learning games web",
+      "educational games kids react", "learning games toddlers", "math game for 5 year old", "number bonds",
+      "kids games offline pwa", "kids math pwa",
+      "topic:educational-game", "topic:educational-games", "topic:math-game", "topic:math-games",
+      "topic:kids-game", "topic:kids-games", "topic:preschool", "topic:kindergarten", "topic:edtech topic:math",
+      "topic:children topic:education", "topic:kids-learning", "topic:kids-learning-app",
+      "topic:early-childhood-education", "topic:math-education topic:kids", "topic:educational topic:kids",
+      "topic:phaser topic:education", "topic:kids topic:math"
+    ]
+  },
+  "ranked": [
+    {
+      "rank": 1,
+      "repo": "Sigmafier/ellaz-games",
+      "url": "https://github.com/Sigmafier/ellaz-games",
+      "demo": "https://ellaz.fun/",
+      "stars": 1, "forks": 2, "license": "MIT", "stack": "TypeScript, Preact + React, Phaser 4, Vite, PWA",
+      "commits": 61, "human_authors": 2, "first_commit": "2026-09-26", "last_human_commit": "2026-10-24",
+      "scores": { "A": 23, "B": 18, "C": 16, "D": 3, "E": 7, "F": 9, "total": 76 },
+      "age_fit": "Toán có các cấp 'tiền số học' cho 4–5 tuổi (đếm nhóm hình, ghép số với nhóm, cộng/trừ bằng hình) rồi lên cộng/trừ trong 5, 10, 20; kèm game quy luật 'What comes next?' cho 4–6 tuổi, ghép bóng, xếp màu, mê cung, trí nhớ",
+      "risks": [
+        "Repo mới 2 tháng, 1 sao, là bản mirror tự động từ repo private, không nhận PR",
+        "Codebase lớn (khoảng 170 nghìn dòng TS không tính test, 49 game: 24 cho mọi lứa tuổi, 25 cho trẻ em, chỉ 6–8 game liên quan toán/tư duy), phải cắt bớt",
+        "Có PostHog analytics (ẩn danh, thiết kế theo COPPA) và sao lưu Firestore tùy chọn, cần gỡ hoặc thay để tuân thủ Nghị định 13/2023 về dữ liệu cá nhân",
+        "Giọng đọc dùng Web Speech API, chất lượng tiếng Việt phụ thuộc thiết bị"
+      ],
+      "verification": ["verified_api", "verified_git", "verified_code", "not_run"]
+    },
+    {
+      "rank": 2,
+      "repo": "JesseRWeigel/battlemath",
+      "url": "https://github.com/JesseRWeigel/battlemath",
+      "demo": "https://jesserweigel.github.io/battlemath/",
+      "stars": 38, "forks": 28, "license": "MIT", "stack": "TypeScript, React 18, Vite, Vitest, Cypress, PWA",
+      "commits": 272, "human_authors": 18, "first_commit": "2019-03-01", "last_human_commit": "2026-11-02",
+      "scores": { "A": 14, "B": 17, "C": 12, "D": 14, "E": 9, "F": 9, "total": 75 },
+      "age_fit": "Luyện +, −, ×, ÷; mức Easy dùng số 1–9, hợp với trẻ 6 tuổi trở lên. Không có phần tiền số học (đếm, nhận biết nhanh số lượng, hình, quy luật). Mỗi câu có đồng hồ 30 giây (màn boss 20 giây), giá trị viết cứng trong code",
+      "risks": [
+        "Âm thanh và nhạc nền tạo bằng MusicGen, trọng số mô hình có license CC-BY-NC 4.0, phải thay trước khi thương mại hóa",
+        "App.tsx dài 1.748 dòng, AppReducer.ts dài 924 dòng, logic dồn vào một chỗ",
+        "Có dependency react-native-web dù chỉ là web app"
+      ],
+      "verification": ["verified_api", "verified_git", "verified_code", "not_run"]
+    },
+    {
+      "rank": 3,
+      "repo": "guyellis/learn",
+      "url": "https://github.com/guyellis/learn",
+      "demo": "https://learn.headvert.com",
+      "stars": 46, "forks": 8, "license": "MIT", "stack": "TypeScript strict, React 19, MUI 9, Vite, Vitest",
+      "commits": 979, "bot_commits": 683, "human_authors": 5, "first_commit": "2016-10-28", "last_human_commit": "2026-10-19",
+      "scores": { "A": 12, "B": 9, "C": 17, "D": 12, "E": 9, "F": 5, "total": 64 },
+      "age_fit": "Luyện tính cho 5–12 tuổi, trả lời bằng nút chọn đáp án. Giao diện kiểu bài tập, nhiều chữ, không có nhân vật hay câu chuyện",
+      "risks": [
+        "Yếu tố game thấp (chỉ có huy hiệu, điểm, đồng hồ)",
+        "Không có cơ chế đa ngôn ngữ, chữ viết cứng trong code",
+        "70% commit là bot cập nhật dependency"
+      ],
+      "verification": ["verified_api", "verified_git", "verified_code", "not_run"]
+    }
+  ],
+  "deep_evaluated_not_top3": [
+    {
+      "repo": "ShazMoghaddam/Math-Adventure", "url": "https://github.com/ShazMoghaddam/Math-Adventure",
+      "stars": 0, "license": "MIT (thêm 2026-10-26)", "stack": "Vanilla JS, PWA, không build",
+      "commits": 17, "scores": { "A": 22, "B": 18, "C": 6, "D": 2, "E": 6, "F": 4, "total": 58 },
+      "note": "Nội dung đúng lứa tuổi nhất: thế giới Clover Meadow dạy đếm và nhận biết nhanh số lượng cho 4–6 tuổi, Sunflower Fields dạy cộng cho 5–7 tuổi; mặt xúc xắc, tia số, thỏ Benny vẽ bằng SVG, âm thanh tổng hợp bằng Web Audio nên không có rủi ro license asset. Nhưng toàn bộ logic nằm trong một file script.js 1.209 dòng viết kiểu nén, biến toàn cục, không test, không đa ngôn ngữ. Dùng tốt để tham khảo nội dung, không nên dùng làm nền"
+    },
+    {
+      "repo": "timmalich/edukiz", "url": "https://github.com/timmalich/edukiz",
+      "stars": 14, "license": "MIT", "stack": "Vue 3, Vite, PWA, Vitest (yêu cầu coverage 95%)",
+      "commits": 213, "scores": { "A": 12, "B": 13, "C": 13, "D": 8, "E": 8, "F": 4, "total": 58 },
+      "note": "Chủ yếu là game chữ cái và trí nhớ, chỉ có 1 game toán (+/− kết quả 0–18). Có 339 file giọng đọc tiếng Đức, không ghi nguồn gốc, phải thu âm lại toàn bộ nếu Việt hóa"
+    },
+    {
+      "repo": "KorbinianP/BlitzCount", "url": "https://github.com/KorbinianP/BlitzCount",
+      "stars": 0, "license": "MIT", "stack": "Vanilla JS modules, PWA",
+      "commits": 13, "scores": { "A": 17, "B": 14, "C": 10, "D": 1, "E": 5, "F": 8, "total": 55 },
+      "note": "Chỉ dạy một kỹ năng: nhận biết nhanh số lượng 0–12 (ngón tay, trái cây, xúc xắc), có bàn phím số rút gọn cho trẻ mẫu giáo. Có i18n.js en/de, thêm tiếng Việt dễ. Phù hợp để lấy làm 1 mini-game"
+    }
+  ],
+  "excluded": [
+    { "repo": "YasienDwieb/kids-games", "stars": 12, "reason": "License PolyForm Shield 1.0.0 cấm dùng để làm sản phẩm cạnh tranh với tác giả; là app Expo React Native, không phải web thuần", "verification": "verified_code" },
+    { "repo": "binolgeorge/joju-learn", "stars": 1, "reason": "Code MIT nhưng nội dung, hình minh họa, âm thanh thuộc CC BY-NC 4.0, cấm thương mại", "verification": "verified_code" },
+    { "repo": "jkanev/educational-html-games", "stars": 7, "reason": "License CC BY-NC-ND 4.0: cấm thương mại, cấm chỉnh sửa; cập nhật cuối 2018", "verification": "verified_code" },
+    { "repo": "KDE/gcompris", "stars": 61, "reason": "Viết bằng Qt/QML, không phải web; license GPL (theo hiểu biết, chưa đọc file). Tham khảo sư phạm rất tốt cho 2–10 tuổi", "verification": "verified_api" },
+    { "repo": "phetsims/number-play", "stars": null, "reason": "Code sim GPL-3.0 theo điều khoản của PhET (nguồn thứ cấp). Tham khảo sư phạm số học sớm rất tốt", "verification": "web_search" },
+    { "repo": "kingsmath/web-games", "stars": 9, "reason": "CC BY-NC 4.0 theo kết quả web search; GitHub không nhận diện được license", "verification": "web_search" },
+    { "repo": "vnglst/tafels.app", "stars": 77, "reason": "Không có license (tác giả giữ toàn quyền); chỉ dạy bảng cửu chương", "verification": "verified_api" },
+    { "repo": "jaysavsani07/math-metrix", "stars": 451, "reason": "Flutter, không có license; nhắm tới người lớn", "verification": "verified_api" },
+    { "repo": "codeforlife-education/rapid-router", "stars": 60, "reason": "Game lập trình Blockly, không phải toán; license chưa xác định (NOASSERTION)", "verification": "verified_api" },
+    { "repo": "pankajladhar/speedy-math", "stars": 28, "reason": "Commit cuối của người thật năm 2019, coi như đã bỏ", "verification": "verified_git" },
+    { "repo": "volotat/ARC-Game", "stars": 89, "reason": "Câu đố suy luận trừu tượng ARC cho người lớn", "verification": "verified_api" },
+    { "repo": "mnito/factors-game", "stars": 20, "reason": "Game thừa số, vượt độ tuổi; cập nhật cuối 2021", "verification": "verified_api" },
+    { "repo": "joarder/mathspark", "stars": 0, "reason": "Chỉ có 3 commit (đẩy code một lần); phần lớn nội dung vượt độ tuổi (mẹo nhân Trachtenberg, chia dài)", "verification": "verified_git" },
+    { "repo": "brwang04-MAML/storm-chaser", "stars": 0, "reason": "Là công cụ đánh giá năng lực toán cho 3–5 tuổi (cố ý không báo đúng/sai), không phải game học. Tham khảo tốt để thiết kế bài kiểm tra đầu vào", "verification": "verified_code" },
+    { "repo": "paulmm/make-it-go", "stars": 0, "reason": "Game tư duy lập trình cho 3–7 tuổi, không phải toán. Tham khảo tốt cho mảng tư duy logic và tuần tự", "verification": "verified_code" },
+    { "repo": "jonathanhawkins/tinkerschool", "stars": 4, "reason": "Cần thiết bị phần cứng M5Stick, Clerk, Supabase và API AI; dành cho K–6, quá nặng", "verification": "verified_code" },
+    { "repo": "fjtrujy/kidmaze", "stars": 0, "reason": "Mê cung vẽ mũi tên/chữ/số cho khoảng 5 tuổi, phạm vi hẹp, 1 tác giả, 2 ngày phát triển", "verification": "verified_git" },
+    { "repo": "bsiegal/ShapeEquate", "stars": 8, "reason": "Apache-2.0, Paper.js; viết từ 2012, 1 tác giả, cập nhật cuối 2023", "verification": "verified_git" },
+    { "repo": "bsiegal/PatternPlanets", "stars": 4, "reason": "Apache-2.0, game quy luật; viết từ 2012, 1 tác giả, cập nhật cuối 2023", "verification": "verified_git" },
+    { "repo": "adamslaski/edu-games", "stars": 1, "reason": "License EPL-2.0 (copyleft theo file); cập nhật cuối 2023", "verification": "verified_api" },
+    { "repo": "stewbis/bubble-maths", "stars": 0, "reason": "Đúng độ tuổi 5–6 nhưng cập nhật cuối 2017", "verification": "verified_git" },
+    { "repo": "deadcoder0904/math-for-kids-quiz", "stars": 6, "reason": "Chỉ 5 commit, cập nhật cuối 2017", "verification": "verified_git" },
+    { "repo": "troll-warlord/tiny-taps", "stars": 0, "reason": "Vue, chủ yếu chữ cái/màu sắc, đếm rất cơ bản; 1 tác giả", "verification": "verified_git" },
+    { "repo": "caomaocao/math-edu", "stars": 2, "reason": "Làm riêng cho 1 bé, dùng giọng nói tiếng Trung; 7 commit", "verification": "verified_git" },
+    { "repo": "Lshuang/kidsedu", "stars": 0, "reason": "Trọng tâm là pinyin tiếng Trung; 11 commit", "verification": "verified_git" }
+  ]
+}
