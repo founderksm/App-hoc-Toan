@@ -44,13 +44,14 @@ body{margin:0;background-color:var(--bg);background-image:radial-gradient(circle
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
 button{font:inherit;color:inherit}
 :focus-visible{outline:4px solid var(--focus);outline-offset:3px}
+[tabindex="-1"]:focus{outline:none}
 h1,h2,h3{text-wrap:balance}
 .gutter{max-width:1120px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 
 /* Thanh trên */
 .topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
 .topbar-in{display:flex;align-items:center;gap:10px;padding-block:10px}
-.brand{display:flex;align-items:center;gap:10px;margin-right:auto;min-width:0;background:none;border:0;padding:0;cursor:pointer;border-radius:16px}
+.brand{display:flex;align-items:center;gap:10px;margin-right:auto;min-width:0;flex:none;background:none;border:0;padding:0;cursor:pointer;border-radius:16px}
 .brand .bong{width:46px;height:48px;flex:none}
 .brand-name{font-family:var(--font-display);font-weight:800;font-size:1.45rem;line-height:1;color:var(--primary-deep);white-space:nowrap;text-align:left}
 .brand-name small{display:block;font-family:var(--font-body);font-size:.7rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);margin-top:5px}
@@ -64,6 +65,7 @@ h1,h2,h3{text-wrap:balance}
 .skin{width:32px;height:32px;border-radius:50%;border:3px solid var(--surface);cursor:pointer;padding:0;background:var(--sw)}
 .skin[aria-pressed="true"]{box-shadow:0 0 0 3px var(--ink)}
 @media (max-width:600px){.brand-name{display:none}.star-pill{font-size:1.2rem}}
+@media (max-width:380px){.topbar-in{gap:6px}.brand .bong{width:38px;height:40px}.star-pill{padding:4px 10px 4px 5px}.star-pill svg{width:26px;height:26px}.topbar .icon-btn{width:42px;height:42px}.skins{gap:4px;padding:4px}.skin{width:28px;height:28px}}
 
 /* Nút "thạch" */
 .jelly{--fill:var(--primary-deep);--lip:var(--primary-lip);border:0;cursor:pointer;background:var(--fill);color:var(--on-fill);font-family:var(--font-display);font-weight:800;font-size:1.25rem;line-height:1.1;padding:14px 24px 12px;min-height:64px;border-radius:22px;box-shadow:0 6px 0 var(--lip);transition:transform .12s,box-shadow .12s;display:inline-flex;align-items:center;gap:10px;text-align:left}
@@ -162,7 +164,8 @@ main{padding-block:12px 48px}
 
 /* Màn chơi */
 .play-layout{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:20px;align-items:start}
-@media (max-width:820px){.play-layout{grid-template-columns:1fr}.side #answer{order:-1}.coach .bong{width:84px}}
+@media (max-width:820px){.play-layout{grid-template-columns:1fr;gap:14px}.side{gap:12px}.coach .bong{width:56px}.coach .bubble{font-size:1rem;padding:10px 14px}.visual{min-height:150px}#play-area{scroll-margin-top:76px}}
+@media (max-width:600px){.skill{display:none}}
 .tray{background:var(--surface);border-radius:var(--r-lg);padding:clamp(14px,2.5vw,22px);box-shadow:0 8px 0 var(--line);display:flex;flex-direction:column;gap:14px;min-width:0}
 .prompt{display:flex;align-items:center;gap:12px}
 .prompt h2{font-family:var(--font-display);font-weight:800;font-size:clamp(1.4rem,3.6vw,2.1rem);margin:0;line-height:1.15;flex:1;min-width:0}
@@ -177,8 +180,8 @@ main{padding-block:12px 48px}
 #answer{display:flex;flex-direction:column;gap:12px}
 
 .items{display:flex;flex-wrap:wrap;gap:clamp(6px,1.8vw,16px);justify-content:center;align-content:center;width:100%}
-.item{position:relative;width:clamp(58px,13vw,92px);aspect-ratio:1;max-width:100%;border:0;background:transparent;padding:4px;cursor:pointer;border-radius:50%;transform:translateY(var(--dy,0)) rotate(var(--rot,0deg));transition:transform .15s}
-.items.many .item{width:clamp(42px,8.6vw,64px)}
+.item{position:relative;width:clamp(58px,13vw,92px);height:clamp(58px,13vw,92px);aspect-ratio:1;max-width:100%;border:0;background:transparent;padding:4px;cursor:pointer;border-radius:50%;transform:translateY(var(--dy,0)) rotate(var(--rot,0deg));transition:transform .15s}
+.items.many .item{width:clamp(44px,8.6vw,64px);height:clamp(44px,8.6vw,64px)}
 .item svg{width:100%;height:100%;display:block;filter:drop-shadow(0 4px 0 var(--shade))}
 .item.counted{transform:translateY(var(--dy,0)) rotate(var(--rot,0deg)) scale(.9)}
 .item.counted::after{content:attr(data-n);position:absolute;top:-6px;right:-6px;width:32px;height:32px;border-radius:50%;background:var(--primary-deep);color:var(--on-fill);font-family:var(--font-display);font-weight:800;font-size:1.1rem;line-height:1;display:grid;place-items:center;box-shadow:0 3px 0 var(--primary-lip)}
@@ -191,16 +194,19 @@ main{padding-block:12px 48px}
 .caption{font-family:var(--font-display);font-weight:700;font-size:1.3rem;color:var(--ink-soft);margin:0;text-align:center}
 .dots-eq{display:flex;align-items:center;gap:18px;flex-wrap:wrap;justify-content:center}
 .dotgrp{display:grid;grid-template-columns:repeat(5,var(--d));gap:8px;--d:clamp(24px,5vw,34px)}
-.dotgrp i,.cell i,.waiting button i{display:block;width:100%;aspect-ratio:1;border-radius:50%;background:var(--berry)}
+.dotgrp i,.cell i,.waiting button i{display:block;width:100%;height:100%;aspect-ratio:1;border-radius:50%;background:var(--berry)}
+.dotgrp i{height:var(--d)}
+.choice.gated{opacity:.5}
+.waiting button.nudge,button.cell.nudge{animation:nudge .9s ease-in-out 2}
 .dotgrp i.b,.cell i.b,.waiting button i{background:var(--lav-deep)}
 .x{position:relative;opacity:.4}
 .x::after{content:"";position:absolute;left:-10%;right:-10%;top:43%;height:14%;background:var(--ink);border-radius:4px;transform:rotate(-40deg)}
 .op{font-family:var(--font-display);font-weight:800;font-size:2.4rem}
-.frames{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;--c:clamp(28px,5.4vw,44px)}
+.frames{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;--c:clamp(34px,5.4vw,44px)}
 .frame{display:grid;grid-template-columns:repeat(5,var(--c));grid-auto-rows:var(--c);gap:5px;padding:8px;background:var(--surface);border-radius:16px;box-shadow:0 4px 0 var(--line)}
 .cell{border-radius:10px;background:var(--surface-2);display:grid;place-items:center;padding:12%;border:0;min-width:0}
 button.cell{cursor:pointer}
-.waiting{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:10px 14px;border:3px dashed var(--line);border-radius:18px;min-height:calc(var(--c,40px) + 24px);--c:clamp(28px,5.4vw,44px)}
+.waiting{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:10px 14px;border:3px dashed var(--line);border-radius:18px;min-height:calc(var(--c,40px) + 24px);--c:clamp(34px,5.4vw,44px)}
 .waiting:empty{display:none}
 .waiting button{width:var(--c);height:var(--c);border:0;padding:0;background:transparent;cursor:pointer}
 
@@ -261,6 +267,9 @@ button.cell{cursor:pointer}
 .walker{position:absolute;top:0;left:0;width:60px;margin-left:-30px;transition:left .16s linear;pointer-events:none;z-index:2}
 .line-help{display:flex;align-items:center;gap:10px;background:var(--surface);border-radius:18px;padding:12px 16px;font-weight:800;box-shadow:0 4px 0 var(--line);margin:0}
 .line-help svg{width:28px;height:28px;flex:none}
+.line-ctl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.line-ctl .jelly{justify-content:center;text-align:center;white-space:nowrap;padding-inline:12px;font-size:1.12rem}
+.flip svg{transform:scaleX(-1)}
 .story{margin:0;font-size:clamp(1.15rem,3vw,1.4rem);font-weight:700;line-height:1.55;background:var(--surface);border-radius:20px;padding:18px 22px;max-width:46ch;box-shadow:0 4px 0 var(--line)}
 
 .done-card{display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px;background:var(--surface);border-radius:var(--r-lg);padding:28px 20px 30px;box-shadow:0 8px 0 var(--line)}
@@ -270,22 +279,24 @@ button.cell{cursor:pointer}
 .done-card .unlock{background:var(--tint-c);border-radius:16px;padding:10px 16px}
 .rating{display:flex;gap:8px}
 .rating svg{width:56px;height:56px}
+.done-card .rating-cap{margin:-6px 0 0;font-size:.8rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
 .done-actions{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:6px}
 
 /* Phòng 3D */
 .stage{position:relative;border-radius:var(--r-lg);overflow:hidden;background:var(--stage-bg);box-shadow:0 8px 0 var(--line);height:clamp(340px,58vh,560px)}
-.stage canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}
+.stage canvas{display:block;width:100%;height:100%;touch-action:pan-y;cursor:grab}
 .stage-bubble{position:absolute;left:14px;top:14px;max-width:min(62%,340px);background:var(--surface);box-shadow:0 4px 0 var(--line);font-size:1.02rem}
 .stage-tools{position:absolute;right:14px;bottom:14px;display:flex;gap:8px;align-items:center}
 .stage-hint{font-size:.78rem;font-weight:800;background:var(--surface);padding:6px 12px;border-radius:999px;color:var(--ink-soft)}
 .stage-status{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:24px;font-weight:800;color:var(--ink-soft)}
-.fallback{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:24px;text-align:center}
+.fallback{position:absolute;inset:0;background:var(--stage-bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:24px;text-align:center}
 .fallback .bong{width:140px;height:auto}
 .fallback p{margin:0;font-weight:700;max-width:42ch}
 .owned{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
 .owned span{background:var(--surface);border-radius:999px;padding:6px 12px;font-weight:800;font-size:.9rem}
 .shop{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
 @media (max-width:820px){.shop{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.shop{grid-template-columns:1fr}}
 .shop-item{background:var(--surface);border-radius:var(--r-md);padding:14px;display:flex;flex-direction:column;gap:12px;box-shadow:0 6px 0 var(--line);min-width:0}
 .shop-item header{display:flex;align-items:center;gap:10px;min-width:0}
 .shop-item .thumb{width:50px;height:50px;flex:none}
@@ -293,6 +304,9 @@ button.cell{cursor:pointer}
 .shop-item small{display:flex;align-items:center;gap:4px;font-weight:800;color:var(--ink-soft);font-size:.9rem}
 .shop-item small svg{width:18px;height:18px}
 .shop-item .jelly{width:100%;justify-content:center;font-size:1.02rem;min-height:54px;padding:10px 12px;text-align:center}
+.shop-note{grid-column:1/-1;margin:0;font-weight:800;color:var(--ink-soft);text-align:center}
+.gate-nums{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.gate-nums button{min-width:72px}
 .blk{font-family:var(--font-display);font-weight:800;font-size:17px;fill:var(--ink)}
 
 /* Đàn số */
@@ -316,9 +330,11 @@ button.cell{cursor:pointer}
 .run-hud .grow{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:4px}
 .run-hud .expr{font-size:clamp(2rem,6vw,3.2rem)}
 .run-stage{position:relative;border-radius:var(--r-lg);overflow:hidden;box-shadow:0 8px 0 var(--line);height:clamp(300px,50vh,460px);background:var(--stage-bg)}
+@media (max-width:820px){.run-stage{height:clamp(240px,42vh,420px)}#run-hud{scroll-margin-top:76px}}
 .run-stage canvas{display:block;width:100%;height:100%;touch-action:manipulation;cursor:pointer}
-.run-stage .stage-bubble{max-width:min(46%,340px)}
-.gate-btns{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.run-stage .stage-bubble{max-width:min(46%,340px);pointer-events:none}
+.gate-btns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:420px){.gate-btns{gap:10px}.gate-btns .jelly{font-size:.98rem;padding:10px 10px 8px;gap:6px}.gate-btns .jelly svg{width:22px;height:22px}.gate-btns b{font-size:1.6rem}}
 .gate-btns .jelly{justify-content:center;font-size:1.12rem;text-align:center}
 .gate-btns b{font-size:1.9rem;line-height:1;font-variant-numeric:tabular-nums}
 .gate-btns .jelly.picked{--fill:var(--tint-b);--lip:var(--tint-b-lip)}
@@ -393,8 +409,8 @@ button.cell{cursor:pointer}
     <aside class="note" aria-labelledby="note-title">
       <h2 id="note-title">Về bản mẫu này</h2>
       <ul>
-        <li>Hành trình 7 cấp, từ đếm số đến 20 tới số 200 và toán có lời văn. Đúng ngay lần đầu 4/5 câu thì mở cấp tiếp theo. Trong mỗi cấp, hình hỗ trợ giảm dần đến khi chỉ còn chữ số.</li>
-        <li>Kiểm tra đầu vào gồm 6 câu, câu sau khó hay dễ tùy câu trước. Bông không báo đúng sai, cuối bài tự xếp bé vào cấp phù hợp.</li>
+        <li>Hành trình 7 cấp, từ đếm số đến 20 tới số 200 và toán có lời văn. Đúng ngay lần đầu 4/5 câu thì mở cấp tiếp theo; sao chỉ thưởng cho câu đúng ngay lần đầu để bé không đoán bừa. Ở cấp 2–4, hình hỗ trợ giảm dần đến khi chỉ còn chữ số.</li>
+        <li>Kiểm tra đầu vào gồm 8 câu, câu sau khó hay dễ tùy câu trước. Bông không báo đúng sai và không tặng sao; cuối bài xếp bé vào cấp thấp nhất mà bé còn sai nhiều hơn đúng. Cài đặt phụ huynh có câu hỏi chặn để bé không tự mở.</li>
         <li>Cấp 1–4 chọn đáp án. Cấp 5–7 dùng bàn phím số, xếp que tính và tia số. Phụ huynh bật "Thử thách tốc độ" trong màn Hành trình.</li>
         <li>Đàn số: mỗi phép tính đúng chơi một ô nhịp của bài "Ngôi sao lấp lánh". Bông phiêu lưu: Bông tự chạy, bé chạm vào cổng có số đúng. Bông dừng lại chờ bé chọn nên không có áp lực thời gian và không có thua. Độ khó của hai trò đi theo cấp bé đang học.</li>
         <li>Đổi giao diện bằng 3 chấm màu ở góc trên; theme chỉ đổi nền, Bông luôn giữ màu hồng. Bông là nhân vật tạm, bản chính sẽ do họa sĩ thiết kế.</li>
@@ -416,10 +432,14 @@ button.cell{cursor:pointer}
     <div class="journey" id="journey"></div>
     <aside class="parent" aria-labelledby="parent-title">
       <h2 id="parent-title">Dành cho phụ huynh</h2>
+      <div id="parent-gate"><small>Phụ huynh chạm vào số <b id="gate-words"></b> để mở cài đặt.</small><div class="gate-nums" id="gate-nums"></div></div>
+      <div id="parent-body" hidden>
       <div class="setting"><div><b>Thử thách tốc độ</b><small>Thêm thanh thời gian. Bé trả lời đúng trước khi hết giờ được thêm 1 sao thưởng. Không trừ điểm.</small></div><button class="switch" type="button" role="switch" aria-checked="false" id="sw-speed" aria-label="Thử thách tốc độ"></button></div>
       <div class="setting"><div><b>Xem trước mọi cấp</b><small>Mở tất cả các cấp để phụ huynh và nhóm phát triển xem thử.</small></div><button class="switch" type="button" role="switch" aria-checked="false" id="sw-preview" aria-label="Xem trước mọi cấp"></button></div>
       <div class="setting"><div><b>Cách đọc số 105</b><small id="zero-example">một trăm linh năm</small></div><div class="seg" role="group" aria-label="Cách đọc số"><button type="button" data-zero="linh" aria-pressed="true">linh</button><button type="button" data-zero="lẻ" aria-pressed="false">lẻ</button></div></div>
+      <div class="setting"><div><b>Giọng đọc tiếng Việt</b><small id="voice-status">Đang kiểm tra máy này…</small></div></div>
       <div class="setting"><div><b>Kiểm tra đầu vào</b><small>Làm lại để Bông xếp cấp mới cho bé. Các cấp đã mở vẫn giữ nguyên.</small></div><button class="jelly soft small" type="button" id="btn-replace">Làm lại</button></div>
+      </div>
     </aside>
   </section>
 
@@ -462,6 +482,7 @@ button.cell{cursor:pointer}
     <div class="piano-top" id="piano-top">
       <div class="coach"><span data-bong="idle" id="piano-bong"></span><p class="bubble left" id="piano-bubble" aria-live="polite">Bé tính rồi bấm phím có đáp án để chơi bài hát nhé!</p></div>
       <div class="pq" id="piano-pq"><div id="piano-q"></div><button class="icon-btn" type="button" id="btn-piano-replay" aria-label="Nghe lại câu hỏi"></button></div>
+      <button class="jelly small" type="button" id="btn-piano-quiz" data-action="piano:again" hidden>Đàn có phép tính</button>
     </div>
     <div class="done-card" id="piano-done" hidden></div>
     <div class="piano" id="piano" role="group" aria-label="Đàn 8 phím"></div>
@@ -609,9 +630,10 @@ const snapshot = () => ({ stars: state.stars, owned: state.owned, skin: state.sk
 const persist = () => store.set('bong.v2', snapshot());
 
 /* ---------- Âm thanh và giọng đọc ---------- */
-let actx = null;
+let actx = null, speechUnlocked = false;
 function ac() {
   if (!actx) { const C = window.AudioContext || window.webkitAudioContext; if (C) actx = new C(); }
+  if (!speechUnlocked && 'speechSynthesis' in window) { speechUnlocked = true; try { speechSynthesis.speak(new SpeechSynthesisUtterance('')); } catch { /* iOS chỉ cho đọc sau một lần chạm */ } }
   if (actx && actx.state === 'suspended') actx.resume().catch(() => {});
   return actx;
 }
@@ -633,12 +655,17 @@ const SFX = {
   jump: () => { tone(440, 0.12, 'triangle', 0.1); tone(880, 0.14, 'triangle', 0.08, 0.08); },
 };
 let viVoice = null;
-function pickVoice() { try { viVoice = speechSynthesis.getVoices().find((v) => /^vi/i.test(v.lang)) || null; } catch { viVoice = null; } }
+function pickVoice() { try { viVoice = speechSynthesis.getVoices().find((v) => /^vi/i.test(v.lang)) || null; } catch { viVoice = null; } voiceStatus(); }
+function voiceStatus() {
+  const el = document.getElementById('voice-status'); if (!el) return;
+  el.textContent = viVoice ? `Có sẵn (${viVoice.name}). Bông sẽ đọc đề cho bé.` : 'Máy này chưa có giọng tiếng Việt nên Bông chưa đọc đề được. Bản chính sẽ dùng giọng thu âm sẵn.';
+  for (const id of ['btn-replay', 'btn-piano-replay', 'btn-run-replay']) { const b = document.getElementById(id); if (b) b.hidden = !viVoice; }
+}
 if ('speechSynthesis' in window) { pickVoice(); try { speechSynthesis.addEventListener('voiceschanged', pickVoice); } catch { /* trình duyệt cũ */ } }
-const toSpeech = (t) => String(t).replace(/\s\+\s/g, ' cộng ').replace(/\s[−-]\s/g, ' trừ ').replace(/\s=\s/g, ' bằng ').replace(/(^|\s)\?(?=\s|$)/g, ' mấy ').replace(/·/g, ',');
+const toSpeech = (t) => String(t).replace(/\s\+\s/g, ' cộng ').replace(/\s[−-]\s/g, ' trừ ').replace(/\s=\s/g, ' bằng ').replace(/\s>\s/g, ' lớn hơn ').replace(/\s<\s/g, ' bé hơn ').replace(/(^|\s)\?(?=\s|$)/g, ' mấy ').replace(/·/g, ',').replace(/\d+/g, (d) => (Number(d) <= 200 ? readVi(Number(d)) : d));
 function say(text) {
-  if (!state.sound || !viVoice || !text) return;
-  try { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(toSpeech(text)); u.voice = viVoice; u.lang = viVoice.lang; u.rate = 0.92; u.pitch = 1.15; speechSynthesis.speak(u); } catch { /* không có giọng đọc */ }
+  if (!state.sound || !viVoice || !text) return null;
+  try { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(toSpeech(text)); u.voice = viVoice; u.lang = viVoice.lang; u.rate = 0.92; u.pitch = 1.15; speechSynthesis.speak(u); return u; } catch { return null; }
 }
 function setBubble(sel, text, speak = true) { const el = $(sel); if (el) el.textContent = text; if (speak) say(text); }
 function mood(svg, kind) {
@@ -681,7 +708,8 @@ function burst(el) {
 }
 function fxTick() {
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
-  if (fx.width !== innerWidth * dpr) { fx.width = innerWidth * dpr; fx.height = innerHeight * dpr; }
+  const fw = Math.round(innerWidth * dpr), fh = Math.round(innerHeight * dpr);
+  if (fx.width !== fw || fx.height !== fh) { fx.width = fw; fx.height = fh; }
   fxc.setTransform(dpr, 0, 0, dpr, 0, 0); fxc.clearRect(0, 0, innerWidth, innerHeight);
   parts = parts.filter((p) => p.life > 0);
   for (const p of parts) {
@@ -727,6 +755,7 @@ function renderSettings() {
   $('#sw-preview').setAttribute('aria-checked', String(state.settings.preview));
   $$('[data-zero]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.zero === state.settings.zero)));
   $('#zero-example').textContent = readVi(105);
+  voiceStatus();
 }
 
 /* ---------- Chuyển màn hình ---------- */
@@ -736,7 +765,8 @@ function showScreen(name, focus = true) {
   window.scrollTo(0, 0);
   if (name !== 'play') { stopTimer(); try { speechSynthesis.cancel(); } catch { /* bỏ qua */ } }
   if (name === 'journey') renderJourney();
-  if (name === 'piano' && !piano.active && !piano.free) startPiano();
+  if (name === 'piano') { if (!piano.active && !piano.free) startPiano(); else if (piano.active && piano.q && !piano.locked) say(piano.q.speak); }
+  else if (state.screen !== 'piano') { pianoStop(); piano.free = false; }
   if (name === 'runner') { if (run.on) resumeRun(); else startRun(); } else pauseRun();
   if (name === 'room') enterRoom(); else room?.pause();
   if (focus) $(`#screen-${name} h1`)?.focus({ preventScroll: true });
@@ -771,7 +801,7 @@ function qAdd10(qi, ctx) {
 }
 function qAdd20No(qi, ctx) {
   const op = Math.random() < 0.5 ? '+' : '−'; let a, b;
-  if (op === '+') { const u = rand(0, 7); a = 10 + u; b = rand(1, 9 - u); } else { const u = rand(2, 9); a = 10 + u; b = rand(1, u); }
+  if (op === '+') { const u = rand(1, 7); a = 10 + u; b = rand(1, 9 - u); } else { const u = rand(2, 9); a = 10 + u; b = rand(1, u); }
   const ans = OPS[op](a, b), u = a - 10;
   return { type: 'arith', a, b, op, answer: ans, input: 'choice', choices: near(ans, 0, 20), visual: qi < 3 && !ctx.placement ? 'frames' : 'none',
     prompt: qi < 3 && !ctx.placement ? 'Bé tính nhé' : 'Bé tính nhẩm nhé', speak: arithSpeak(a, op, b), skill: 'cộng trừ trong phạm vi 20, không qua 10',
@@ -782,7 +812,7 @@ function qMake10(qi, ctx) {
   if (op === '+') { a = rand(6, 9); b = rand(11 - a, 9); } else { a = rand(11, 17); b = rand(a - 9, 9); }
   const ans = OPS[op](a, b), fill = op === '+' ? 10 - a : a - 10, rest = b - fill;
   const visual = ctx.placement ? 'none' : qi < 2 ? 'make10' : qi < 4 ? 'frames10' : 'none';
-  const coach = visual === 'make10' ? (op === '+' ? 'Bé chạm chấm tím để lấp đầy khung 10 nhé!' : `Bé chạm để bớt ${b} chấm. Bớt ${fill} chấm ở khung bên phải trước nhé!`) : null;
+  const coach = visual === 'make10' ? (op === '+' ? 'Bé chạm chấm tím để lấp đầy khung 10 nhé!' : `Bé chạm để bớt ${b} chấm. Bớt ${fill} chấm ở khung thứ hai trước nhé!`) : null;
   return { type: 'arith', a, b, op, fill, rest, answer: ans, input: 'choice', choices: near(ans, 0, 20), visual, coach,
     prompt: visual === 'make10' ? (op === '+' ? 'Lấp đầy khung 10' : `Bớt đi ${b} chấm`) : visual === 'none' ? 'Bé tính nhẩm nhé' : 'Làm tròn chục nhé',
     speak: arithSpeak(a, op, b), skill: 'cộng trừ qua 10 bằng cách làm tròn chục',
@@ -909,22 +939,27 @@ const VISUALS = {
   word: (q) => `<p class="story">${q.text}</p>`,
 };
 const ANSWERS = {
-  choice: (q) => `<div class="choices">${q.choices.map((v) => `<button class="choice" type="button" data-v="${v}"${q.visual === 'make10' ? ' disabled' : ''}>${v}</button>`).join('')}</div>${q.visual === 'make10' ? '<p class="gate-note" id="gate-note">Làm xong phần chấm rồi chọn số nhé</p>' : ''}`,
+  choice: (q) => `<div class="choices">${q.choices.map((v) => `<button class="choice${q.visual === 'make10' ? ' gated' : ''}" type="button" data-v="${v}"${q.visual === 'make10' ? ' aria-disabled="true"' : ''}>${v}</button>`).join('')}</div>${q.visual === 'make10' ? '<p class="gate-note" id="gate-note">Làm xong phần chấm rồi chọn số nhé</p>' : ''}`,
   keypad: () => `<output class="kp-out" id="kp-out" aria-live="polite">&nbsp;</output><div class="keypad">${[1, 2, 3, 4, 5, 6, 7, 8, 9].map((d) => `<button class="key" type="button" data-key="${d}">${d}</button>`).join('')}<button class="key del" type="button" data-key="del">Xóa</button><button class="key" type="button" data-key="0">0</button><button class="key ok" type="button" data-key="ok">Xong</button></div>`,
   compare: () => `<div class="choices">${[['>', 'lớn hơn'], ['<', 'bé hơn'], ['=', 'bằng']].map(([s, l]) => `<button class="choice" type="button" data-cmp="${s}" aria-label="${l}">${s}<small>${l}</small></button>`).join('')}</div>`,
   sticks: (q) => `<div class="steppers">${(q.maxH ? [['h', 'Bó trăm', q.maxH]] : []).concat([['t', 'Bó chục', 9], ['o', 'Que lẻ', 9]]).map(([p, l, m]) => `<div class="stepper" data-place="${p}" data-max="${m}"><button type="button" data-step="-1" aria-label="Bớt ${l.toLowerCase()}">−</button><div><small>${l}</small><output id="st-${p}">0</output></div><button type="button" data-step="1" aria-label="Thêm ${l.toLowerCase()}">+</button></div>`).join('')}</div><button class="jelly wide" type="button" id="btn-sticks-ok">Xong</button>`,
-  line: () => `<p class="line-help">${ICONS.jump}<span>Chạm vào một vạch trên tia số để Bông nhảy tới đó</span></p>`,
+  line: () => `<p class="line-help">${ICONS.jump}<span>Chạm vào vạch, hoặc bấm nút để Bông nhảy từng bước</span></p><div class="line-ctl"><button class="jelly soft" type="button" data-linestep="-1" aria-label="Lùi 1 vạch">${ICONS.back}Lùi 1</button><button class="jelly soft flip" type="button" data-linestep="1" aria-label="Tiến 1 vạch">Tiến 1${ICONS.back}</button></div><button class="jelly wide" type="button" id="btn-line-ok">Bông đứng đây</button>`,
 };
 
 /* ---------- Phiên chơi ---------- */
 let sess = null;
 const timer = { on: false, start: 0, limit: 0, t: null };
+const speedWanted = () => state.settings.speed && sess?.mode === 'level';
+function prepTimer() {
+  const bar = $('#timer'), i = bar.firstElementChild; clearTimeout(timer.t); timer.on = false;
+  bar.hidden = !speedWanted(); bar.classList.remove('out'); i.style.transition = 'none'; i.style.transform = 'scaleX(1)';
+  $('#play-chip').hidden = !speedWanted() && sess?.mode !== 'placement';
+  $('#play-chip').textContent = sess?.mode === 'placement' ? 'Không có đúng sai' : 'Thử thách tốc độ';
+}
 function startTimer() {
   const bar = $('#timer'), i = bar.firstElementChild; clearTimeout(timer.t);
-  timer.on = state.settings.speed && sess?.mode === 'level';
-  bar.hidden = !timer.on; $('#play-chip').hidden = !timer.on && sess?.mode !== 'placement';
-  $('#play-chip').textContent = sess?.mode === 'placement' ? 'Không có đúng sai' : 'Thử thách tốc độ';
-  if (!timer.on) return;
+  if (!speedWanted() || timer.on || sess?.locked) return;
+  timer.on = true;
   timer.start = performance.now(); timer.limit = (sess.level <= 4 ? 20 : 30) * 1000;
   bar.classList.remove('out'); i.style.transition = 'none'; i.style.transform = 'scaleX(1)'; void i.offsetWidth;
   i.style.transition = `transform ${timer.limit}ms linear`; i.style.transform = 'scaleX(0)';
@@ -935,10 +970,10 @@ function stopTimer() {
   const i = $('#timer i'); if (!i) return;
   const cur = getComputedStyle(i).transform; i.style.transition = 'none'; i.style.transform = cur === 'none' ? 'scaleX(1)' : cur;
 }
-const fastEnough = () => timer.on && performance.now() - timer.start < timer.limit;
+const fastEnough = () => speedWanted() && (!timer.on || performance.now() - timer.start < timer.limit);
 
 function startLevel(k) { state.progress.at = k; persist(); sess = { mode: 'level', level: k, qi: 0, total: 5, firstOk: 0, earned: 0 }; openPlay(); }
-function startPlacement() { sess = { mode: 'placement', L: 3, qi: 0, total: 6, earned: 0, log: [] }; openPlay(); }
+function startPlacement() { sess = { mode: 'placement', L: 3, streak: 0, qi: 0, total: 8, earned: 0, log: [] }; openPlay(); }
 function openPlay() {
   showScreen('play', false);
   $('#play-area').hidden = false; $('#play-done').hidden = true;
@@ -964,8 +999,14 @@ function nextQuestion() {
   if (q.type === 'line') placeLineWalker(0, false);
   const coach = sess.mode === 'placement' ? 'Bé trả lời theo cách bé nghĩ nhé!' : q.coach || pick(['Bé thử nhé!', 'Bông tin bé làm được!', 'Mình cùng làm nhé!']);
   setBubble('#coach-bubble', coach, false);
-  say(q.speak);
-  startTimer();
+  const me = sess, u = state.screen === 'play' ? say(q.coach && sess.mode === 'level' ? `${q.speak} ${q.coach}` : q.speak) : null;
+  prepTimer();
+  if (q.visual !== 'make10') {
+    let begun = false; const go = () => { if (!begun && sess === me) { begun = true; startTimer(); } };
+    if (u) { u.onend = go; setTimeout(go, 9000); } else go();
+  }
+  if (innerWidth <= 820 && state.screen === 'play') $('#play-area').scrollIntoView({ block: 'start' });
+  if (kbUser) $('#answer button:not([disabled])')?.focus({ preventScroll: true });
 }
 
 /* Đếm đồ vật */
@@ -995,8 +1036,14 @@ function m10Remove(btn) {
 }
 function m10Done(text) {
   sess.gate = false; $('#caption').textContent = text;
-  $$('#answer .choice').forEach((b) => { b.disabled = false; }); $('#gate-note')?.remove();
-  setBubble('#coach-bubble', 'Giỏi lắm! Giờ bé chọn đáp án nhé.', false);
+  $$('#answer .choice').forEach((b) => { b.classList.remove('gated'); b.removeAttribute('aria-disabled'); }); $('#gate-note')?.remove();
+  setBubble('#coach-bubble', 'Giỏi lắm! Giờ bé chọn đáp án nhé.');
+  startTimer();
+}
+function gatedNudge() {
+  const q = sess?.q; if (!q) return;
+  setBubble('#coach-bubble', q.coach);
+  $$('.waiting button, [data-rm]:not(.gone)').forEach((d) => { d.classList.remove('nudge'); void d.offsetWidth; d.classList.add('nudge'); });
 }
 /* Que tính */
 function drawMat() {
@@ -1030,11 +1077,23 @@ function placeLineWalker(i, hop) {
   w.style.left = `${((i + 0.5) / 11) * 100}%`;
   if (hop) { w.classList.remove('hop'); void w.offsetWidth; w.classList.add('hop'); }
 }
+function lineStep(d) {
+  if (!sess || sess.locked || sess.walking || sess.q?.type !== 'line') return;
+  const idx = Math.max(0, Math.min(10, sess.lineAt + d)); if (idx === sess.lineAt) return;
+  sess.lineAt = idx; placeLineWalker(idx, true); SFX.count((idx % 10) + 1);
+}
+function lineSubmit() {
+  if (!sess || sess.locked || sess.walking || sess.q?.type !== 'line') return;
+  submit(sess.q.s + sess.lineAt, $(`.tick[data-i="${sess.lineAt}"]`));
+}
 function lineTap(btn) {
-  if (!sess || sess.locked || sess.walking) return;
-  const idx = Number(btn.dataset.i); sess.walking = true; let cur = sess.lineAt;
+  if (!sess || sess.locked || sess.walking || sess.q?.type !== 'line') return;
+  const idx = Number(btn.dataset.i), me = sess;
+  if (idx === sess.lineAt) { placeLineWalker(idx, true); setBubble('#coach-bubble', 'Bông đang đứng ở vạch này. Bé chạm vạch khác, hoặc bấm "Bông đứng đây" nhé!'); return; }
+  sess.walking = true; let cur = sess.lineAt;
   const dir = idx > cur ? 1 : -1;
   const go = () => {
+    if (sess !== me || state.screen !== 'play') return;
     if (cur === idx) { sess.walking = false; sess.lineAt = idx; submit(sess.q.s + idx, btn); return; }
     cur += dir; placeLineWalker(cur, true); SFX.count((cur % 10) + 1);
     setTimeout(go, reduceMotion() ? 0 : 170);
@@ -1061,26 +1120,25 @@ function markRight(el, q) {
   if (q.input === 'line' && el) { el.classList.add('right'); el.querySelector('span').textContent = q.answer; }
 }
 function onRight(el) {
-  const q = sess.q; sess.locked = true;
-  const fast = fastEnough(); stopTimer();
+  const q = sess.q, me = sess; sess.locked = true;
+  const fast = fastEnough() && sess.firstTry; stopTimer();
   markRight(el, q);
   SFX.correct(); burst(el); mood($('#coach-bong'), 'cheer');
   const praise = pick(['Đúng rồi!', 'Giỏi quá!', 'Chính xác!']);
   setBubble('#coach-bubble', `${praise} ${q.reveal}`, false);
   say(`${praise} ${answerWords(q)}`);
-  sess.earned++; if (sess.firstTry) sess.firstOk++;
-  addStars(1, el);
+  if (sess.firstTry) { sess.firstOk++; sess.earned++; addStars(1, el); }
   if (fast) {
     sess.earned++;
-    setTimeout(() => { addStars(1, $('#timer')); setBubble('#coach-bubble', 'Nhanh quá! Bé được thêm 1 sao thưởng.', false); }, 750);
+    setTimeout(() => { if (sess !== me) return; addStars(1, $('#timer')); setBubble('#coach-bubble', 'Nhanh quá! Bé được thêm 1 sao thưởng.', false); }, 750);
   }
-  setTimeout(nextQuestion, fast ? 2300 : 1900);
+  setTimeout(() => { if (sess === me && state.screen === 'play') nextQuestion(); }, fast ? 2300 : 1900);
 }
 function onWrong(el, value) {
   const q = sess.q; sess.firstTry = false; sess.misses++;
   SFX.soft(); mood($('#coach-bong'), 'think');
   if (el?.classList.contains('choice')) { el.classList.add('wrong'); el.disabled = true; }
-  if (q.input === 'keypad') { const o = $('#kp-out'); o.classList.remove('shake'); void o.offsetWidth; o.classList.add('shake'); sess.kp = ''; setTimeout(() => { o.textContent = ' '; }, 450); }
+  if (q.input === 'keypad') { const o = $('#kp-out'); o.classList.remove('shake'); void o.offsetWidth; o.classList.add('shake'); sess.kp = ''; setTimeout(() => { o.textContent = sess.kp || '\u00a0'; }, 450); }
   if (q.input === 'line' && el) { el.classList.add('wrong'); el.querySelector('span').textContent = value; }
   if (q.type === 'count') $$('.item:not(.counted)').forEach((it) => { it.classList.remove('nudge'); void it.offsetWidth; it.classList.add('nudge'); });
   const msg = sess.misses >= 2 ? `Mình cùng xem nhé: ${q.reveal}` : q.type === 'sticks' ? sticksHint(q) : q.hint;
@@ -1088,12 +1146,13 @@ function onWrong(el, value) {
 }
 function placementAnswer(ok, el) {
   sess.locked = true; sess.log.push({ level: sess.L, ok });
-  sess.L = ok ? Math.min(7, sess.L + 1) : Math.max(1, sess.L - 1);
+  // đúng 2 câu liên tiếp mới lên cấp, sai 1 câu thì xuống: một lần đoán trúng không đẩy bé lên quá cao
+  if (ok) { sess.streak++; if (sess.streak >= 2) { sess.L = Math.min(7, sess.L + 1); sess.streak = 0; } } else { sess.streak = 0; sess.L = Math.max(1, sess.L - 1); }
   SFX.pop(); mood($('#coach-bong'), 'cheer');
   if (el?.classList.contains('choice')) { el.classList.add('picked'); $$('#answer .choice').forEach((b) => { b.disabled = true; }); }
   setBubble('#coach-bubble', pick(['Bông ghi lại rồi!', 'Cảm ơn bé!', 'Mình sang câu tiếp nhé!']));
-  sess.earned++; addStars(1, el);
-  setTimeout(nextQuestion, 1200);
+  const me = sess;
+  setTimeout(() => { if (sess === me && state.screen === 'play') nextQuestion(); }, 1200);
 }
 function doneHTML(o) {
   const acts = o.actions || [
@@ -1102,7 +1161,7 @@ function doneHTML(o) {
     { label: 'Vào phòng của Bông', go: 'room', icon: 'house', soft: true },
   ];
   return `${bongSVG('cheer')}<h2 tabindex="-1" class="done-title">${o.title}</h2><p>${o.text}</p>
-    ${o.rating ? `<div class="rating" aria-label="${o.rating} trên 3 sao">${[1, 2, 3].map((s) => (s <= o.rating ? ICONS.coin : ICONS.coinEmpty)).join('')}</div>` : ''}
+    ${o.rating != null ? `<div class="rating" aria-label="Đánh giá ${o.rating} trên 3 sao">${[1, 2, 3].map((s) => (s <= o.rating ? ICONS.coin : ICONS.coinEmpty)).join('')}</div><p class="rating-cap">Đánh giá lượt chơi</p>` : ''}
     ${o.extra ? `<p class="unlock">${o.extra}</p>` : ''}
     <div class="done-actions">${acts.map((a) => `<button class="jelly${a.soft ? ' soft' : ''}" type="button" ${a.go ? `data-go="${a.go}"` : `data-action="${a.action}"`}>${a.icon ? ICONS[a.icon] : ''}${a.label}</button>`).join('')}</div>`;
 }
@@ -1112,18 +1171,19 @@ function finish() {
   renderProgress(true);
   const p = state.progress;
   if (sess.mode === 'placement') {
-    const L = sess.L; p.placed = true; p.unlocked = Math.max(p.unlocked, L); p.at = L; persist();
-    d.innerHTML = doneHTML({ title: 'Xong rồi!', text: `Bông xếp bé vào Cấp ${L}: ${LEVELS[L - 1].title}.`, extra: L > 1 ? `Các cấp từ 1 đến ${L - 1} đã mở để bé ôn lại khi thích.` : '', label: `Bắt đầu Cấp ${L}`, action: `level:${L}` });
+    const L = placementLevel(sess.log), before = p.unlocked; p.placed = true; p.unlocked = Math.max(p.unlocked, L); p.at = L; persist();
+    const extra = L < before ? `Bông gợi ý bé ôn lại từ Cấp ${L}. Các cấp bé đã mở vẫn giữ nguyên.` : L > 1 ? `Các cấp từ 1 đến ${L - 1} đã mở để bé ôn lại khi thích.` : '';
+    d.innerHTML = doneHTML({ title: 'Xong rồi!', text: `Bông xếp bé vào Cấp ${L}: ${LEVELS[L - 1].title}.`, extra, label: `Bắt đầu Cấp ${L}`, action: `level:${L}` });
     say(`Xong rồi! Bông xếp bé vào cấp ${readVi(L)}.`);
   } else {
-    const k = sess.level, ok = sess.firstOk, rating = ok >= 4 ? 3 : ok === 3 ? 2 : 1, pass = ok >= 4;
-    p.best[k] = Math.max(p.best[k] || 0, rating);
+    const k = sess.level, ok = sess.firstOk, pass = ok >= 4, rating = pass ? (ok === 5 ? 3 : 2) : ok === 3 ? 1 : 0;
+    if (pass) p.best[k] = Math.max(p.best[k] || 0, rating);
     let unlockedNow = false;
-    if (pass && k === p.unlocked && k < 7) { p.unlocked = k + 1; unlockedNow = true; }
+    if (pass && k === p.unlocked) { p.unlocked = k + 1; unlockedNow = k < 7; }
     persist();
     const hasNext = k < 7 && levelOpen(k + 1);
     const extra = unlockedNow ? `Bé đã mở khóa Cấp ${k + 1}: ${LEVELS[k].title}!` : pass ? (k === 7 ? 'Bé đã đi hết hành trình số!' : '') : 'Đúng ngay lần đầu 4/5 câu để mở cấp tiếp theo nhé.';
-    d.innerHTML = doneHTML({ title: pass ? 'Giỏi quá!' : 'Bé cố lên nhé!', text: `Bé đúng ngay lần đầu ${ok}/5 câu và nhận ${sess.earned} ngôi sao.`, rating, extra,
+    d.innerHTML = doneHTML({ title: pass ? 'Giỏi quá!' : 'Bé cố lên nhé!', text: `Bé đúng ngay lần đầu ${ok}/5 câu${sess.earned ? ` và nhận ${sess.earned} ngôi sao` : ''}.`, rating, extra,
       label: pass && hasNext ? `Sang Cấp ${k + 1}` : 'Chơi lại cấp này', action: `level:${pass && hasNext ? k + 1 : k}` });
     say(pass ? `Giỏi quá! ${extra}` : 'Bé cố lên nhé! Mình chơi lại cấp này nha.');
   }
@@ -1132,11 +1192,22 @@ function finish() {
   title.focus({ preventScroll: true });
 }
 
+// Cấp xếp vào = cấp thấp nhất mà bé sai nhiều hơn đúng; một lần lỡ tay ở cấp đã vững không kéo bé xuống
+function placementLevel(log) {
+  const by = {};
+  for (const { level, ok } of log) { const v = (by[level] ||= { r: 0, w: 0 }); if (ok) v.r++; else v.w++; }
+  const levels = Object.keys(by).map(Number);
+  const failed = levels.filter((l) => by[l].w > by[l].r);
+  if (failed.length) return Math.min(...failed);
+  const passed = levels.filter((l) => by[l].r > by[l].w);
+  return passed.length ? Math.min(7, Math.max(...passed) + 1) : Math.min(...levels);
+}
+
 /* ---------- Hành trình ---------- */
 const levelOpen = (k) => state.settings.preview || k <= state.progress.unlocked;
 let walking = false;
 function renderJourney() {
-  const u = state.progress.unlocked;
+  const u = state.progress.unlocked, allDone = u > LEVELS.length;
   $('#journey').innerHTML = '<svg class="journey-path" id="journey-path" aria-hidden="true"><path d=""/></svg>' + LEVELS.map((L, i) => {
     const k = L.id, status = k < u ? 'done' : k === u ? 'current' : levelOpen(k) ? 'open' : 'locked', best = state.progress.best[k] || 0;
     const stars = k < u || best ? `<div class="st-stars" aria-label="${best} trên 3 sao">${[1, 2, 3].map((s) => (s <= best ? ICONS.coin : ICONS.coinEmpty)).join('')}</div>` : '';
@@ -1145,8 +1216,8 @@ function renderJourney() {
       <div class="st-label"><small>Cấp ${k}${status === 'current' ? ' · Đang học' : ''}</small><b>${L.title}</b><span>${L.sub}</span>${note}${stars}</div></div>`;
   }).join('') + `<span class="walker-j" id="walker-j">${bongSVG('idle')}</span>`;
   $('#btn-placement').hidden = state.progress.placed;
-  setBubble('#journey-bubble', state.progress.placed ? `Bé đang học Cấp ${u}: ${LEVELS[u - 1].title}. Chạm vào vòng tròn để chơi nhé!` : 'Bé làm 6 câu nhỏ để Bông biết nên bắt đầu từ cấp nào nhé. Không có đúng sai đâu!', false);
-  renderSettings();
+  setBubble('#journey-bubble', allDone ? 'Bé đã đi hết hành trình số! Chơi lại cấp nào cũng được nhé.' : state.progress.placed ? `Bé đang học Cấp ${u}: ${LEVELS[u - 1].title}. Chạm vào vòng tròn để chơi nhé!` : 'Bé làm 8 câu nhỏ để Bông biết nên bắt đầu từ cấp nào nhé. Không có đúng sai đâu!', false);
+  renderSettings(); renderParentGate();
   requestAnimationFrame(layoutJourney);
 }
 function nodeCenter(k) {
@@ -1171,11 +1242,13 @@ function placeJourneyWalker(k, hop) {
 }
 function walkTo(k, done) {
   const from = Math.min(7, Math.max(1, state.progress.at || state.progress.unlocked));
-  if (reduceMotion() || from === k) { placeJourneyWalker(k, true); setTimeout(done, from === k ? 300 : 0); return; }
+  if (reduceMotion() || from === k) { walking = true; placeJourneyWalker(k, true); setTimeout(() => { walking = false; if (state.screen === 'journey') done(); }, from === k ? 300 : 0); return; }
   walking = true; const dir = from < k ? 1 : -1; let cur = from;
+  const still = () => state.screen === 'journey' || ((walking = false), false);
   const tick = () => {
+    if (!still()) return;
     cur += dir; placeJourneyWalker(cur, true); SFX.count(cur);
-    if (cur === k) { setTimeout(() => { walking = false; done(); }, 420); } else setTimeout(tick, 340);
+    if (cur === k) { setTimeout(() => { if (!still()) return; walking = false; done(); }, 420); } else setTimeout(tick, 340);
   };
   tick();
 }
@@ -1188,6 +1261,7 @@ function renderShop() {
     return `<article class="shop-item"><header>${ICONS[it.id].replace('<svg ', '<svg class="thumb" ')}<div><b>${it.name}</b><small>${ICONS.coin} ${it.cost} sao</small></div></header>
       <button class="jelly${owned ? '' : ' buy'}" type="button" data-buy="${it.id}" ${owned || lack > 0 ? 'disabled' : ''}>${label}</button></article>`;
   }).join('');
+  if (state.owned.length === SHOP.length) $('#shop').insertAdjacentHTML('beforeend', '<p class="shop-note">Bé đã trang trí đủ phòng! Món mới sẽ có ở bản chính.</p>');
   const f = $('#fallback-owned');
   if (f) f.innerHTML = state.owned.map((id) => `<span>${SHOP.find((s) => s.id === id)?.name ?? ''}</span>`).join('');
 }
@@ -1211,7 +1285,7 @@ async function enterRoom() {
   if (!webglOK()) { showFallback('Máy này chưa hỗ trợ 3D nên phòng của Bông đang hiển thị ở chế độ 2D.'); return; }
   roomLoading = true; $('#room-status').hidden = false;
   try {
-    const THREE = await import('three');
+    const THREE = await Promise.race([import('three'), new Promise((_, no) => setTimeout(() => no(new Error('timeout')), 12000))]);
     room = await buildRoom(THREE, $('#room-canvas'));
     $('#room-status').hidden = true;
     if (state.screen !== 'room') room.pause();
@@ -1228,6 +1302,7 @@ async function buildRoom(THREE, host) {
   const cv = renderer.domElement;
   cv.setAttribute('role', 'img'); cv.setAttribute('aria-label', 'Phòng 3D của Bông. Kéo để xoay phòng, chạm vào Bông để Bông nhảy.');
   host.appendChild(cv);
+  cv.addEventListener('webglcontextlost', (e) => { e.preventDefault(); try { api.pause(); } catch { /* chưa dựng xong */ } room = null; showFallback('Máy tạm dừng đồ họa 3D nên phòng của Bông chuyển sang chế độ 2D.'); });
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(36, 1, 0.1, 100);
@@ -1424,16 +1499,23 @@ async function buildRoom(THREE, host) {
 }
 
 /* ---------- Câu hỏi chung cho Đàn số và Bông phiêu lưu ---------- */
+function qDots() {
+  const n = rand(3, 10);
+  return { type: 'dots', n, answer: n, prompt: 'Có bao nhiêu chấm?', speak: 'Có bao nhiêu chấm?', skill: 'đếm', hint: 'Bé đếm từng chấm nhé.', reveal: `Có ${n} chấm.` };
+}
 function levelPool(forPiano) {
-  const u = state.progress.unlocked;
-  if (u <= 2) return [qAdd10];
-  if (u <= 4) return [qAdd20No, qMake10, qMake10];
+  const u = state.progress.unlocked; // cấp bé đang học: chỉ hỏi những gì đã học tới cấp đó
+  if (u <= 1) return [qDots];
+  if (u === 2) return [qDots, qAdd10];
+  if (u === 3) return [qAdd10, qAdd20No];
+  if (u === 4) return [qAdd20No, qMake10];
   return forPiano ? [qAdd20No, qMake10, qGap] : [qAdd20No, qMake10, qGap, () => qNeighbor(11, 199)];
 }
 const gameQ = (forPiano) => pick(levelPool(forPiano))(4, { placement: true });
 function qDisplay(q) {
   if (q.tokens) return exprHTML(q.tokens).replace(' id="qbox"', '');
   if (q.type === 'arith') return exprHTML([q.a, q.op, q.b, '=', '?']).replace(' id="qbox"', '');
+  if (q.type === 'dots') return `<div class="dotgrp" aria-label="${q.n} chấm">${rep(dot(), q.n).join('')}</div>`;
   return `<p class="qtext">${q.prompt}</p>`;
 }
 
@@ -1444,7 +1526,7 @@ const NOTES = [
 ];
 // Câu đầu "Ngôi sao lấp lánh": mỗi phép tính đúng chơi một ô nhịp; phím mang đáp án chính là nốt của ô nhịp đó
 const SONG = [[0, 0], [4, 4], [5, 5], [4], [3, 3], [2, 2], [1, 1], [0]];
-const piano = { active: false, free: false, i: 0, q: null, key: 0, labels: [], locked: false, firstTry: true, misses: 0, earned: 0, firstOk: 0 };
+const piano = { token: 0, nodes: [], timers: [], active: false, free: false, i: 0, q: null, key: 0, labels: [], locked: false, firstTry: true, misses: 0, earned: 0, firstOk: 0 };
 function pianoTone(freq, delay = 0, dur = 0.5) {
   if (!state.sound) return;
   const a = ac(); if (!a) return;
@@ -1455,17 +1537,24 @@ function pianoTone(freq, delay = 0, dur = 0.5) {
     const o = a.createOscillator(), g = a.createGain();
     o.type = type; o.frequency.setValueAtTime(freq * m, t); g.gain.value = v;
     o.connect(g).connect(out); o.start(t); o.stop(t + dur + 0.7);
+    piano.nodes.push(o);
   }
+  if (piano.nodes.length > 200) piano.nodes = piano.nodes.slice(-120);
 }
 function flashKey(k, delayMs = 0, holdMs = 240) {
-  setTimeout(() => { const el = $(`.pkey[data-k="${k}"]`); if (!el) return; el.classList.add('down'); setTimeout(() => el.classList.remove('down'), holdMs); }, delayMs);
+  piano.timers.push(setTimeout(() => { const el = $(`.pkey[data-k="${k}"]`); if (!el) return; el.classList.add('down'); setTimeout(() => el.classList.remove('down'), holdMs); }, delayMs));
+}
+function pianoStop() {
+  for (const o of piano.nodes) { try { o.stop(); } catch { /* đã dừng */ } }
+  piano.nodes = []; piano.timers.forEach(clearTimeout); piano.timers = [];
+  $$('.pkey.down').forEach((k) => k.classList.remove('down'));
 }
 function playBar(bar, start = 0) {
   const beat = bar.length > 1 ? 0.42 : 0.8;
   bar.forEach((k, j) => { const at = start + j * beat; pianoTone(NOTES[k].f, at, beat); flashKey(k, at * 1000, beat * 650); });
   return start + bar.length * beat;
 }
-function replaySong() { let t = 0; for (const bar of SONG) t = playBar(bar, t); }
+function replaySong() { pianoStop(); let t = 0; for (const bar of SONG) t = playBar(bar, t); }
 function spread(ans, count) {
   const out = [];
   for (let d = 1; out.length < count && d < 60; d++) for (const c of [ans + d, ans - d]) if (c >= 0 && out.length < count) out.push(c);
@@ -1481,8 +1570,8 @@ function renderPianoProgress(all = false) {
   $('#piano-progress').innerHTML = SONG.map((_, i) => `<i class="${all || i < piano.i ? 'done' : i === piano.i ? 'now' : ''}"></i>`).join('');
 }
 function startPiano() {
-  Object.assign(piano, { active: true, free: false, i: 0, earned: 0, firstOk: 0 });
-  $('#piano-done').hidden = true; $('#piano-top').hidden = false; $('#piano-pq').hidden = false;
+  pianoStop(); Object.assign(piano, { active: true, free: false, i: 0, earned: 0, firstOk: 0 }); piano.token++;
+  $('#piano-done').hidden = true; $('#piano-top').hidden = false; $('#piano-pq').hidden = false; $('#btn-piano-quiz').hidden = true;
   nextPianoQ();
 }
 function nextPianoQ() {
@@ -1494,21 +1583,21 @@ function nextPianoQ() {
   $('#piano-q').innerHTML = qDisplay(q);
   renderKeys('numbers'); renderPianoProgress();
   setBubble('#piano-bubble', piano.i === 0 ? 'Bé tính rồi bấm phím có đáp án. Bấm đúng là đàn hát luôn!' : pick(['Phím nào đây bé?', 'Tiếp nào!', 'Bé đàn hay quá!']), false);
-  say(q.speak);
+  if (state.screen === 'piano') say(q.speak);
 }
 function pressKey(el) {
   const k = Number(el.dataset.k);
   if (!piano.active) { pianoTone(NOTES[k].f, 0, 0.5); flashKey(k, 0, 200); return; }
   if (piano.locked) return;
   if (k === piano.key) {
-    piano.locked = true; piano.earned++; if (piano.firstTry) piano.firstOk++;
+    piano.locked = true; if (piano.firstTry) { piano.firstOk++; piano.earned++; addStars(1, el); }
     const end = playBar(SONG[piano.i]);
     mood($('#piano-bong'), 'cheer'); burst(el);
     const box = $('#piano-q .qbox'); if (box) { box.textContent = piano.q.answer; box.classList.add('filled'); }
     setBubble('#piano-bubble', `Đúng rồi! ${piano.q.reveal}`, false);
-    addStars(1, el);
     piano.i++;
-    setTimeout(nextPianoQ, end * 1000 + 700);
+    const tk = piano.token;
+    setTimeout(() => { if (piano.token === tk) nextPianoQ(); }, end * 1000 + 700);
   } else {
     piano.firstTry = false; piano.misses++;
     pianoTone(NOTES[k].f, 0, 0.3); el.classList.remove('wrong'); void el.offsetWidth; el.classList.add('wrong');
@@ -1524,16 +1613,16 @@ function finishPiano() {
   $('#piano-top').hidden = true; renderKeys('notes');
   const d = $('#piano-done'); d.hidden = false;
   d.innerHTML = doneHTML({
-    title: 'Bé đàn xong rồi!', text: `Bé chơi trọn câu đầu bài "Ngôi sao lấp lánh", đúng ngay lần đầu ${piano.firstOk}/${SONG.length} phím và nhận ${piano.earned} ngôi sao.`,
-    rating: piano.firstOk >= 7 ? 3 : piano.firstOk >= 5 ? 2 : 1,
+    title: 'Bé đàn xong rồi!', text: `Bé chơi trọn câu đầu bài "Ngôi sao lấp lánh", đúng ngay lần đầu ${piano.firstOk}/${SONG.length} phím${piano.earned ? ` và nhận ${piano.earned} ngôi sao` : ''}.`,
+    rating: piano.firstOk >= 7 ? 3 : piano.firstOk >= 5 ? 2 : piano.firstOk >= 3 ? 1 : 0,
     actions: [{ label: 'Nghe lại cả bài', action: 'piano:replay' }, { label: 'Đàn lượt mới', action: 'piano:again', soft: true }, { label: 'Đàn tự do', action: 'piano:free', soft: true }, { label: 'Về nhà', go: 'home', soft: true }],
   });
   const title = d.querySelector('.done-title'); burst(title); mood(d.querySelector('.bong'), 'cheer'); title.focus({ preventScroll: true });
   setTimeout(replaySong, 700);
 }
 function pianoFree() {
-  piano.active = false; piano.free = true;
-  $('#piano-done').hidden = true; $('#piano-top').hidden = false; $('#piano-pq').hidden = true;
+  pianoStop(); piano.active = false; piano.free = true; piano.token++;
+  $('#piano-done').hidden = true; $('#piano-top').hidden = false; $('#piano-pq').hidden = true; $('#btn-piano-quiz').hidden = false;
   renderKeys('notes');
   setBubble('#piano-bubble', 'Bé đàn tự do nhé! Thử chơi Đô Đô Sol Sol La La Sol xem.', false);
 }
@@ -1572,6 +1661,7 @@ function startRun() {
   $('#run-q').innerHTML = '<p class="qtext">Bông đang khởi động…</p>';
   renderRunProgress(); setGateButtons(null);
   setBubble('#run-bubble', 'Bông chạy nè! Chạm vào màn hình để Bông nhảy.', false);
+  if (innerWidth <= 820) $('#run-hud').scrollIntoView({ block: 'start' });
   resumeRun();
 }
 function resumeRun() { cancelAnimationFrame(run.raf); resizeRun(); run.last = 0; if (run.on) run.raf = requestAnimationFrame(runFrame); }
@@ -1632,7 +1722,7 @@ function judgeGate() {
     addStars(1, $('#run-stage'));
   } else {
     run.bump = 0.5; SFX.soft();
-    setBubble('#run-bubble', `Ối, chưa đúng rồi. ${q.reveal}. Cổng ${q.answer} ở ${g.right === 'up' ? 'trên' : 'dưới'} đó!`);
+    setBubble('#run-bubble', `Ối, chưa đúng! Đáp án là ${q.answer}, ở cổng ${g.right === 'up' ? 'trên' : 'dưới'}.`);
   }
 }
 function stepRun(dt) {
@@ -1642,6 +1732,7 @@ function stepRun(dt) {
     if (run.gap <= 0) { if (run.i >= RUN_TOTAL) { finishRun(); return; } spawnGate(); }
   }
   let target = baseSpeed();
+  if (g && !g.result && g.x - bx > 420 * s) target *= 2.4;
   if (g && !run.choice && !g.result && g.x - bx < 240 * s) {
     target = 0;
     if (!run.waitSaid) { run.waitSaid = true; setBubble('#run-bubble', 'Bông chờ bé chọn cổng nhé!', false); }
@@ -1665,8 +1756,8 @@ function finishRun() {
   for (const id of ['#run-hud', '#run-stage', '#gate-btns']) $(id).hidden = true;
   const d = $('#run-done'); d.hidden = false;
   d.innerHTML = doneHTML({
-    title: 'Bông về đích!', text: `Bé chọn đúng ${run.firstOk}/${RUN_TOTAL} cổng và nhận ${run.earned} ngôi sao.`,
-    rating: run.firstOk >= 5 ? 3 : run.firstOk >= 3 ? 2 : 1,
+    title: 'Bông về đích!', text: `Bé chọn đúng ${run.firstOk}/${RUN_TOTAL} cổng${run.earned ? ` và nhận ${run.earned} ngôi sao` : ''}.`,
+    rating: run.firstOk >= 5 ? 3 : run.firstOk >= 4 ? 2 : run.firstOk >= 2 ? 1 : 0,
     actions: [{ label: 'Chạy lượt mới', action: 'run:again' }, { label: 'Về nhà', go: 'home', soft: true }, { label: 'Vào phòng của Bông', go: 'room', icon: 'house', soft: true }],
   });
   const title = d.querySelector('.done-title'); SFX.correct(); burst(title); mood(d.querySelector('.bong'), 'cheer'); title.focus({ preventScroll: true });
@@ -1740,6 +1831,20 @@ function drawRun() {
 }
 
 /* ---------- Khởi động ---------- */
+let kbUser = false, parentOpen = false, gateAnswer = 0;
+function renderParentGate() {
+  $('#parent-gate').hidden = parentOpen; $('#parent-body').hidden = !parentOpen;
+  if (parentOpen) return;
+  let n = rand(21, 98); if (n % 10 === 0 || Math.floor(n / 10) === n % 10) n += 1;
+  gateAnswer = n;
+  const swap = (n % 10) * 10 + Math.floor(n / 10), opts = shuffle([...new Set([n, swap, n + 10 > 99 ? n - 10 : n + 10])]);
+  $('#gate-words').textContent = `"${readVi(n)}"`;
+  $('#gate-nums').innerHTML = opts.map((v) => `<button class="jelly soft small" type="button" data-pgate="${v}">${v}</button>`).join('');
+}
+function parentGateTry(v) {
+  if (v === gateAnswer) { parentOpen = true; SFX.pop(); } else SFX.soft();
+  renderParentGate();
+}
 function bind() {
   document.addEventListener('click', (e) => {
     const t = e.target;
@@ -1768,21 +1873,27 @@ function bind() {
     const mv = t.closest('[data-move]'); if (mv) { m10Move(mv); return; }
     const rm = t.closest('[data-rm]'); if (rm) { m10Remove(rm); return; }
     const choice = t.closest('.choice');
+    if (choice && choice.classList.contains('gated')) { gatedNudge(); return; }
     if (choice && !choice.disabled) { if (choice.dataset.cmp) submit(choice.dataset.cmp, choice); else submit(Number(choice.dataset.v), choice); return; }
     const key = t.closest('[data-key]'); if (key) { kpPress(key.dataset.key); return; }
     const st = t.closest('[data-step]'); if (st) { step(st); return; }
     if (t.closest('#btn-sticks-ok')) { const s = sess.st; submit(s.h * 100 + s.t * 10 + s.o, $('#btn-sticks-ok')); return; }
     const tick = t.closest('.tick'); if (tick) { lineTap(tick); return; }
+    const ls = t.closest('[data-linestep]'); if (ls) { lineStep(Number(ls.dataset.linestep)); return; }
+    if (t.closest('#btn-line-ok')) { lineSubmit(); return; }
+    const pg = t.closest('[data-pgate]'); if (pg) { parentGateTry(Number(pg.dataset.pgate)); return; }
     const zero = t.closest('[data-zero]'); if (zero) { state.settings.zero = zero.dataset.zero; persist(); renderSettings(); say(readVi(105)); return; }
     const buyBtn = t.closest('[data-buy]'); if (buyBtn) buy(buyBtn.dataset.buy);
   });
+  document.addEventListener('pointerdown', () => { kbUser = false; }, true);
   document.addEventListener('keydown', (e) => {
+    if (e.key === 'Tab') kbUser = true;
     if (state.screen === 'runner' && run.on) {
       if (e.key === 'ArrowUp') { e.preventDefault(); chooseLane('up'); } else if (e.key === 'ArrowDown') { e.preventDefault(); chooseLane('down'); } else if (e.key === ' ' && e.target === document.body) { e.preventDefault(); runHop(); }
       return;
     }
     if (state.screen !== 'play' || sess?.q?.input !== 'keypad' || sess.locked) return;
-    if (/^[0-9]$/.test(e.key)) kpPress(e.key); else if (e.key === 'Backspace') kpPress('del'); else if (e.key === 'Enter') { e.preventDefault(); kpPress('ok'); }
+    if (/^[0-9]$/.test(e.key)) kpPress(e.key); else if (e.key === 'Backspace') kpPress('del'); else if (e.key === 'Enter' && e.target === document.body) { e.preventDefault(); kpPress('ok'); }
   });
   $('#btn-sound').addEventListener('click', () => { state.sound = !state.sound; if (!state.sound) { try { speechSynthesis.cancel(); } catch { /* bỏ qua */ } } else SFX.pop(); renderSound(); persist(); });
   $('#btn-replay').innerHTML = ICONS.sound;
@@ -1794,7 +1905,10 @@ function bind() {
   $('#btn-replace').addEventListener('click', () => { ac(); SFX.pop(); startPlacement(); });
   $('#sw-speed').addEventListener('click', () => { state.settings.speed = !state.settings.speed; persist(); renderSettings(); SFX.pop(); });
   $('#sw-preview').addEventListener('click', () => { state.settings.preview = !state.settings.preview; persist(); renderJourney(); SFX.pop(); });
-  $('#btn-reset').addEventListener('click', () => {
+  $('#btn-reset').addEventListener('click', (e) => {
+    const b = e.currentTarget;
+    if (!b.dataset.armed) { b.dataset.armed = '1'; b.textContent = 'Bấm lần nữa để xóa toàn bộ tiến độ'; setTimeout(() => { delete b.dataset.armed; b.textContent = 'Đặt lại bản mẫu'; }, 4000); return; }
+    delete b.dataset.armed; b.textContent = 'Đặt lại bản mẫu';
     state.stars = START_STARS; state.owned = []; state.progress = freshProgress(); persist(); renderStars(true); renderShop(); room?.reset();
     setBubble('#home-bubble', 'Bông đã dọn phòng, đưa bé về đầu hành trình và tặng lại 5 sao!', false);
   });
@@ -1803,7 +1917,7 @@ function bind() {
   $('#btn-piano-replay').addEventListener('click', () => { if (piano.q) say(piano.q.speak); });
   $('#btn-run-replay').innerHTML = ICONS.sound;
   $('#btn-run-replay').addEventListener('click', () => { if (run.q) say(run.q.speak); });
-  $('#run-canvas').addEventListener('pointerdown', runTap);
+  $('#run-canvas').addEventListener('click', runTap);
   new ResizeObserver(() => resizeRun()).observe($('#run-stage'));
 }
 
@@ -1816,7 +1930,7 @@ function start(data) {
     state.sound = saved.sound !== false;
     if (saved.progress && typeof saved.progress.unlocked === 'number') {
       const p = saved.progress;
-      state.progress = { unlocked: Math.min(7, Math.max(1, p.unlocked | 0)), best: p.best && typeof p.best === 'object' ? p.best : {}, placed: !!p.placed, at: Math.min(7, Math.max(1, (p.at | 0) || 1)) };
+      state.progress = { unlocked: Math.min(8, Math.max(1, p.unlocked | 0)), best: p.best && typeof p.best === 'object' ? p.best : {}, placed: !!p.placed, at: Math.min(7, Math.max(1, (p.at | 0) || 1)) };
     }
     if (saved.settings) state.settings = { speed: !!saved.settings.speed, preview: !!saved.settings.preview, zero: saved.settings.zero === 'lẻ' ? 'lẻ' : 'linh' };
   }

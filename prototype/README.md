@@ -11,10 +11,10 @@ Mở `index.html` bằng trình duyệt. Cần có mạng để tải font Googl
 | Nhân vật | Tự thiết kế nhân vật riêng trước, xin license Sanrio sau khi có người dùng. **Không dùng Kuromi** khi chưa có license |
 | 3D | Kết hợp 2D và 3D: 3D cho phòng thưởng, bản đồ thế giới và bài học hình khối; 2D cho đếm và tính toán |
 | Theme | Hồng là mặc định; có thể đổi sang Bạc hà hoặc Oải hương. Theme chỉ đổi nền và môi trường; **Bông luôn giữ màu hồng** để nhận diện thương hiệu. Mọi màu lấy từ token CSS |
-| Cấu trúc | Một hành trình 7 cấp. Mở cấp tiếp theo khi đúng ngay lần đầu 4/5 câu |
+| Cấu trúc | Một hành trình 7 cấp. Mở cấp tiếp theo khi đúng ngay lần đầu 4/5 câu. Sao chỉ thưởng cho câu đúng ngay lần đầu, để bé không đoán bừa |
 | Cách trả lời | Cấp 1–4 chọn đáp án; cấp 5–7 dùng bàn phím số, xếp que tính và tia số |
 | Thời gian | Không tính giờ. Phụ huynh có thể bật "Thử thách tốc độ": trả lời đúng trước khi hết giờ được thêm sao, không trừ điểm |
-| Xếp cấp | Bài kiểm tra đầu vào 6 câu theo kiểu bậc thang: đúng thì câu sau khó hơn, sai thì dễ hơn. Không báo đúng sai |
+| Xếp cấp | Bài kiểm tra đầu vào 8 câu: đúng 2 câu liên tiếp thì lên cấp, sai 1 câu thì xuống. Cấp xếp vào là cấp thấp nhất mà bé sai nhiều hơn đúng. Không báo đúng sai, không tặng sao |
 
 ## Thang cấp độ
 
@@ -38,6 +38,10 @@ Bông đọc số theo quy tắc tiếng Việt: mười lăm, hai mươi mốt,
 | **Bông phiêu lưu** | Bông tự chạy trên đường. Mỗi lượt có 2 cổng số, một trên một dưới. Bé chạm vào cổng có số đúng (hoặc bấm nút "Cổng trên"/"Cổng dưới"). Chọn cổng trên thì Bông bay lên mây. Chạm chỗ khác để Bông nhảy chơi. Mỗi lượt có 6 cổng | Bông dừng lại chờ bé chọn nên không có áp lực thời gian và không có thua. Chọn sai thì Bông chỉ lắc nhẹ và chỉ ra cổng đúng. Vẽ bằng canvas 2D, màu lấy từ token theme. Bàn phím: ↑, ↓, phím cách |
 
 Độ khó của 2 trò đi theo cấp cao nhất bé đã mở: cấp 1–2 cộng trừ trong 10; cấp 3–4 trong 20, có qua 10; từ cấp 5 thêm tìm số còn thiếu. Riêng Bông phiêu lưu có thêm câu số liền trước, liền sau đến 200.
+
+## Rà soát
+
+Biên bản rà soát lỗi logic và giao diện ngày 2026-11-05: `docs/review/ra-soat-2026-11-05.md`.
 
 ## Giới hạn đã biết
 
